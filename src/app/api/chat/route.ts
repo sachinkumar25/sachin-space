@@ -78,14 +78,17 @@ export async function POST(req: NextRequest) {
         // If the model wants to call a tool, return specific JSON
         if (message.tool_calls && message.tool_calls.length > 0) {
             const toolCall = message.tool_calls[0];
-            const args = JSON.parse(toolCall.function.arguments);
 
-            return NextResponse.json({
-                type: 'action',
-                tool: toolCall.function.name,
-                params: args,
-                response: `Executing ${toolCall.function.name}...`
-            });
+            if (toolCall.type === 'function') {
+                const args = JSON.parse(toolCall.function.arguments);
+
+                return NextResponse.json({
+                    type: 'action',
+                    tool: toolCall.function.name,
+                    params: args,
+                    response: `Executing ${toolCall.function.name}...`
+                });
+            }
         }
 
         // Otherwise return normal text
