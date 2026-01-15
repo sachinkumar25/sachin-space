@@ -59,7 +59,8 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="w-full h-full flex flex-col rounded-xl overflow-hidden border border-white/10 shadow-2xl backdrop-blur-xl bg-gray-900/80 ring-1 ring-black/10"
+                        className={`w-full h-full flex flex-col rounded-xl overflow-hidden backdrop-blur-xl bg-gray-900/80 ring-1 ring-black/10 transition-all duration-200
+                        ${window.zIndex >= useWindowStore.getState().maxZIndex ? 'border-white/20 shadow-2xl' : 'border-white/5 shadow-lg opacity-90'}`}
                         onClick={() => focusWindow(window.id as AppID)}
                     >
                         {/* Header / Title Bar */}

@@ -23,8 +23,8 @@ function DockIcon({ mouseX, id, icon: Icon, label }: { mouseX: MotionValue<numbe
         return val - bounds.x - bounds.width / 2;
     });
 
-    const widthSync = useTransform(distance, [-150, 0, 150], [48, 80, 48]);
-    const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
+    const widthSync = useTransform(distance, [-120, 0, 120], [48, 80, 48]); // Narrower trigger range for sharper feel
+    const width = useSpring(widthSync, { mass: 0.1, stiffness: 200, damping: 20 }); // Snappier
 
     const { openWindow, windows } = useWindowStore();
     const isOpen = windows[id]?.isOpen;
