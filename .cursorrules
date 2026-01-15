@@ -1,0 +1,27 @@
+# Cursor Rules used by the AI
+
+## Project Context
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Zustand for state management
+- Framer Motion for animations
+- Lucide React for icons
+
+## Styling
+- Use Tailwind v4 syntax.
+- Use `glass` and `glass-dark` utilities for windows and panels.
+- Follow macOS design language (rounded corners, blurred backgrounds, system fonts).
+
+## Component Structure
+- `src/components/desktop`: System level components (Desktop, Dock, MenuBar)
+- `src/components/windows`: Window management and frames
+- `src/components/apps`: Individual application content
+
+## State Management
+- Use Zustand for global state (window manager, active app, etc.)
+
+## Critical Documentation
+- **ALWAYS** reference `docs/anttigravity.md` (The PRD) for architectural decisions and phase steps.
+- Before starting a new phase, read the relevant section in `docs/anttigravity.md`.
+
