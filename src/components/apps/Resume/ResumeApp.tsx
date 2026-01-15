@@ -10,7 +10,7 @@ export default function ResumeApp() {
         The path below refers to public/resume.pdf
       */}
             <object
-                data="/resume.pdf"
+                data="/resume.pdf#zoom=75"
                 type="application/pdf"
                 className="w-full h-full"
             >

@@ -14,19 +14,45 @@ export default function ProjectsApp() {
                 {projects.map((project) => (
                     <div
                         key={project.id}
-                        className="group flex flex-col bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-white/20"
+                        className="group flex flex-col bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:border-white/20"
                     >
+                        {/* Project Image */}
+                        {project.image && (
+                            <div className="h-48 overflow-hidden relative">
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] to-transparent opacity-60" />
+                            </div>
+                        )}
+
                         {/* Header / Title */}
-                        <div className="p-5 flex items-start justify-between">
+                        <div className="p-5 flex items-start justify-between relative">
                             <div>
-                                <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                                <h3 className="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">
                                     {project.title}
                                 </h3>
-                                <p className="text-sm text-gray-400 mt-1 line-clamp-2">
+                                <p className="text-sm text-gray-300 mt-2 line-clamp-2">
                                     {project.description}
                                 </p>
                             </div>
                         </div>
+
+                        {/* Metrics Section */}
+                        {project.metrics && (
+                            <div className="px-5 pb-4">
+                                <ul className="space-y-1">
+                                    {project.metrics.map((metric, i) => (
+                                        <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                                            <span className="text-green-400 mt-1">✓</span>
+                                            <span>{metric}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
 
                         {/* Spacer */}
                         <div className="flex-1" />

@@ -35,6 +35,7 @@ export default function TerminalApp() {
     const xtermRef = useRef<XTerm | null>(null);
     const fitAddonRef = useRef<FitAddon | null>(null);
     const commandBuffer = useRef<string>('');
+    const isProcessing = useRef(false);
 
     useEffect(() => {
         if (!terminalRef.current || xtermRef.current) return;
@@ -58,8 +59,8 @@ export default function TerminalApp() {
         fitAddonRef.current = fitAddon;
 
         // Initial greeting
-        term.writeln('\x1b[1;32mWelcome to SachinOS Terminal\x1b[0m');
-        term.writeln('Type "help" for a list of commands.');
+        term.writeln('\x1b[1;32mWelcome to SachinOS Terminal v1.0\x1b[0m');
+        term.writeln('Type "tutorial" for a quick start guide or "help" for commands.');
         term.write('\r\n$ ');
 
         // Handle Resize
@@ -72,7 +73,7 @@ export default function TerminalApp() {
             term.focus(); // Force focus
         }, 100);
 
-        const isProcessing = useRef(false);
+
 
         // Input Handling
         term.onData(async (data) => {

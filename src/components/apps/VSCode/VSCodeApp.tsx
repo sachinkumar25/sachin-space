@@ -16,7 +16,27 @@ export default function VSCodeApp() {
     const initialFile: FileNode = {
         name: 'welcome.py',
         language: 'python',
-        content: `# Welcome to VS Code\n# -------------------\n# Select a file from the explorer to start coding.`
+        content: `"""
+Welcome to My Code Hub! 👨‍💻
+---------------------------
+This VS Code instance is connected to my GitHub repositories.
+
+Use the Explorer on the left 👈 to browse my actual projects:
+- 📂 projects/
+  - Each folder represents a project from my GitHub.
+  - View 'README.md' for details.
+  - Check out the source files (e.g., 'main.py', 'index.ts') to see my coding style.
+
+This is a great place to review technical implementations without leaving the site.
+"""
+
+def github_sync():
+    print("Fetching repositories...")
+    print("Syncing code snippets...")
+    print("Done! Ready for review.")
+
+if __name__ == "__main__":
+    github_sync()`
     };
 
     const [activeAttachedFile, setActiveAttachedFile] = useState<FileNode | null>(null);

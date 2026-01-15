@@ -1,10 +1,14 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import MenuBar from './MenuBar';
 import Dock from './Dock';
 import WindowManager from '../windows/WindowManager';
 import MobileOverlay from '../mobile/MobileOverlay';
+import IntroModal from './IntroModal';
+import TerminalSidebar from './TerminalSidebar';
+import { useWindowStore } from '@/store/useWindowStore';
+import { welcomeMessage } from '@/data/welcome';
 
 interface DesktopProps {
   children?: React.ReactNode;
@@ -12,6 +16,16 @@ interface DesktopProps {
 
 export default function Desktop({ children }: DesktopProps) {
   const desktopRef = useRef<HTMLDivElement>(null);
+  const { openWindow } = useWindowStore();
+
+  useEffect(() => {
+    // Auto-open Messages with welcome message
+    const timer = setTimeout(() => {
+      openWindow('messages');
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <main
@@ -30,6 +44,8 @@ export default function Desktop({ children }: DesktopProps) {
       </div>
 
       <Dock />
+      <TerminalSidebar />
+      <IntroModal />
       <MobileOverlay />
     </main>
   );

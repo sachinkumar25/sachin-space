@@ -6,6 +6,8 @@ export interface Project {
     githubUrl?: string;
     demoUrl?: string;
     codeSnippet: string;
+    metrics?: string[];
+    image?: string;
 }
 
 export const projects: Project[] = [
@@ -13,6 +15,12 @@ export const projects: Project[] = [
         id: 'econavix-ai',
         title: 'EcoNavixAI',
         description: 'Sustainable routing engine optimizing for fuel efficiency using ML. Reduces carbon footprint by up to 15% per trip.',
+        metrics: [
+            "Reduced carbon footprint by up to 15% per trip",
+            "Optimized fuel consumption curves via topographic analysis",
+            "Implemented custom A* variant for environmental cost"
+        ],
+        image: '/projects/econavix.png',
         techStack: ['Python', 'TensorFlow', 'Google Maps API', 'React Native'],
         githubUrl: 'https://github.com/sachinkumar25/EcoNavixAI',
         demoUrl: '',
@@ -43,6 +51,12 @@ export const projects: Project[] = [
         id: 'tributum',
         title: 'Tributum',
         description: 'Automated financial analysis and tax estimation tool with predictive savings analysis.',
+        metrics: [
+            "Real-time transaction aggregation & tax code application",
+            "Predictive analysis for automated deduction discovery",
+            "Handles complex multi-region tax rule sets"
+        ],
+        image: '/projects/tributum.png',
         techStack: ['TypeScript', 'Next.js', 'PostgreSQL', 'Stripe API'],
         githubUrl: 'https://github.com/sachinkumar25/tributum',
         demoUrl: '',
@@ -68,6 +82,12 @@ export const calculateDeductibles = (transactions: Transaction[]): TaxSummary =>
         id: 'recruit-raptor',
         title: 'RecruitRaptor',
         description: 'High-velocity resume parsing and candidate scoring engine using NLP to reduce time-to-hire.',
+        metrics: [
+            "Significantly reduced time-to-hire via automation",
+            "High-precision entity extraction from unstructured PDFs",
+            "Intelligent candidate scoring against job descriptions"
+        ],
+        image: '/projects/recruit-raptor.png',
         techStack: ['Python', 'Spacy (NLP)', 'Flask', 'Selenium'],
         githubUrl: 'https://github.com/sachinkumar25/recruitraptor',
         demoUrl: '',
@@ -94,6 +114,12 @@ export const calculateDeductibles = (transactions: Transaction[]): TaxSummary =>
         id: 'protechxion-sw',
         title: 'ProTechXionSW',
         description: 'Advanced security monitoring and threat detection system integrating intrusion detection.',
+        metrics: [
+            "Real-time threat detection and deep packet inspection",
+            "Integrated system monitoring & automated incident response",
+            "Built with C++ & Qt for high-performance enterprise security"
+        ],
+        image: '/projects/protechxion.png',
         techStack: ['C++', 'Qt', 'OpenSSL', 'Wireshark Libs'],
         githubUrl: 'https://github.com/sachinkumar25/ProTechXionSW',
         demoUrl: '',

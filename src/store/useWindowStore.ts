@@ -15,6 +15,10 @@ interface WindowStore {
     toggleMaximize: (id: AppID) => void;
     setWindowPosition: (id: AppID, position: { x: number; y: number }) => void;
     setWindowSize: (id: AppID, size: { width: number; height: number }) => void;
+
+    // Desktop Widgets State
+    isAboutOpen: boolean;
+    toggleAbout: (isOpen?: boolean) => void;
 }
 
 const INITIAL_WINDOW_STATE: Omit<WindowState, 'id' | 'title' | 'zIndex'> = {
@@ -64,6 +68,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
             projects: 'Projects',
             resume: 'Resume',
             vscode: 'VS Code',
+            mail: 'Mail',
+            messages: 'Messages',
+            github: 'GitHub',
         };
 
         const newZIndex = maxZIndex + 1;
@@ -78,8 +85,19 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
                     isOpen: true,
                     isMinimized: false,
                     zIndex: newZIndex,
-                    position: state.windows[id]?.position || { x: 100 + (newZIndex % 10) * 20, y: 50 + (newZIndex % 10) * 20 }, // Cascade effect
-                    size: state.windows[id]?.size || { width: 800, height: 600 },
+                    // Calculate center position if needed
+                    position: state.windows[id]?.position || (() => {
+                        if (typeof window !== 'undefined' && id === 'messages') {
+                            const width = 800; // Default width
+                            const height = 600; // Default height
+                            return {
+                                x: Math.max(0, (window.innerWidth - width) / 2),
+                                y: Math.max(0, (window.innerHeight - height) / 2 - 50) // Slightly above center for visual balance
+                            };
+                        }
+                        return { x: 100 + (newZIndex % 10) * 20, y: 50 + (newZIndex % 10) * 20 };
+                    })(),
+                    size: state.windows[id]?.size || (id === 'projects' ? { width: 1100, height: 800 } : { width: 800, height: 600 }),
                     launchArgs: args, // Set initial args
                 },
             },
@@ -168,6 +186,13 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
                     size,
                 },
             },
+        }));
+    },
+
+    isAboutOpen: true, // Default to open on load
+    toggleAbout: (isOpen) => {
+        set((state) => ({
+            isAboutOpen: isOpen !== undefined ? isOpen : !state.isAboutOpen,
         }));
     },
 }));
