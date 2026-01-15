@@ -11,7 +11,7 @@ const DOCK_APPS: { id: AppID; label: string; icon: React.ElementType }[] = [
     { id: 'finder', label: 'Finder', icon: Folder },
     { id: 'terminal', label: 'Terminal', icon: Terminal },
     { id: 'projects', label: 'Projects', icon: Briefcase },
-    { id: 'vs_code' as AppID, label: 'VS Code', icon: Code2 }, // Note: updating AppID type might be needed if vs_code vs vscode mismatch
+    { id: 'vscode' as AppID, label: 'VS Code', icon: Code2 },
     { id: 'resume', label: 'Resume', icon: FileText },
 ];
 
