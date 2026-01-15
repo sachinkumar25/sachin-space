@@ -28,7 +28,7 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
 
     // Force maximize behavior on mobile
     const effectivePosition = (isMaximized || isMobile) ? { x: 0, y: 32 } : window.position;
-    const effectiveSize = (isMaximized || isMobile) ? { width: '100vw', height: 'calc(100vh - 110px)' } : window.size; // 110px leaves room for dock + menu
+    const effectiveSize = (isMaximized || isMobile) ? { width: '100vw', height: 'calc(100vh - 96px)' } : window.size; // 96px leaves room for dock + menu
     const effectiveDisableDragging = isMaximized || isMobile;
     const effectiveEnableResizing = !isMaximized && !isMobile;
 
@@ -63,7 +63,7 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
                     dragHandleClassName="window-header"
                     cancel=".nodrag"
                     style={{ zIndex: window.zIndex }}
-                    className="flex flex-col"
+                    className="flex flex-col pointer-events-auto"
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
