@@ -10,67 +10,111 @@ export interface Project {
 
 export const projects: Project[] = [
     {
-        id: 'ai-trading-bot',
-        title: 'AI Trading Bot',
-        description: 'A reinforcement learning agent that trades crypto futures using PPO algorithms and sentiment analysis from Twitter/X.',
-        techStack: ['Python', 'PyTorch', 'FastAPI', 'Redis'],
-        githubUrl: 'https://github.com/sachin/trading-bot',
-        codeSnippet: `import torch
-import torch.nn as nn
-
-class TradingAgent(nn.Module):
-    def __init__(self, input_dim, output_dim):
-        super(TradingAgent, self).__init__()
-        self.fc1 = nn.Linear(input_dim, 128)
-        self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, output_dim)
+        id: 'econavix-ai',
+        title: 'EcoNavixAI',
+        description: 'Sustainable routing engine optimizing for fuel efficiency using ML. Reduces carbon footprint by up to 15% per trip.',
+        techStack: ['Python', 'TensorFlow', 'Google Maps API', 'React Native'],
+        githubUrl: 'https://github.com/sachinkumar25/EcoNavixAI',
+        demoUrl: '',
+        codeSnippet: `class EcoRouter:
+    def calculate_green_route(self, start, end, vehicle_profile):
+        """
+        Optimizes pathfinding for minimal fuel consumption using A* variant.
+        """
+        graph = self.load_topography_graph()
         
-    def forward(self, x):
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-        return self.fc3(x)
+        def fuel_heuristic(node, target):
+            distance = self.haversine(node, target)
+            elevation_change = self.get_elevation(target) - self.get_elevation(node)
+            
+            # Penalize uphill gradients heavily
+            fuel_cost = distance * (1 + max(0, elevation_change * 0.05))
+            return fuel_cost
 
-# Initialize PPO Agent
-agent = TradingAgent(input_dim=24, output_dim=3)
-print("Agent initialized ready for backtesting...")`,
+        return a_star_search(
+            graph, 
+            start, 
+            end, 
+            heuristic=fuel_heuristic,
+            weight_fn=self.calculate_segment_emission
+        )`,
     },
     {
-        id: 'portfolio-os',
-        title: 'Portfolio OS',
-        description: 'A React-based operating system simulation running completely in the browser. Features a working terminal, window manager, and AI integration.',
-        techStack: ['Next.js', 'Typescript', 'Tailwind', 'Zustand'],
-        githubUrl: 'https://github.com/sachin/portfolio-os',
-        demoUrl: 'https://sachin.dev',
-        codeSnippet: `// The core window management store
-export const useWindowStore = create<WindowStore>((set) => ({
-  windows: {},
-  activeWindow: null,
-  
-  openWindow: (id) => set((state) => {
-    // Logic to open window with glassmorphism
-    // and z-index handling
-    return { ...state, activeWindow: id };
-  }),
-}));`,
+        id: 'tributum',
+        title: 'Tributum',
+        description: 'Automated financial analysis and tax estimation tool with predictive savings analysis.',
+        techStack: ['TypeScript', 'Next.js', 'PostgreSQL', 'Stripe API'],
+        githubUrl: 'https://github.com/sachinkumar25/tributum',
+        demoUrl: '',
+        codeSnippet: `// Core calculation engine for tax deduction estimation
+export const calculateDeductibles = (transactions: Transaction[]): TaxSummary => {
+  return transactions.reduce((acc, tx) => {
+    const rule = TaxRules.find(r => r.category === tx.category);
+    
+    if (rule && rule.isDeductible) {
+      const deductionAmount = tx.amount * rule.percentage;
+      
+      return {
+        ...acc,
+        totalDeduction: acc.totalDeduction + deductionAmount,
+        qualifiedItems: [...acc.qualifiedItems, { id: tx.id, saved: deductionAmount }]
+      };
+    }
+    return acc;
+  }, { totalDeduction: 0, qualifiedItems: [] });
+};`,
     },
     {
-        id: 'rag-knowledge-base',
-        title: 'RAG Knowledge Base',
-        description: 'Enterprise search engine utilizing RAG (Retrieval Augmented Generation) to answer questions from millions of PDF documents.',
-        techStack: ['LangChain', 'Pinecone', 'OpenAI', 'React'],
-        githubUrl: 'https://github.com/sachin/rag-kb',
-        codeSnippet: `from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
+        id: 'recruit-raptor',
+        title: 'RecruitRaptor',
+        description: 'High-velocity resume parsing and candidate scoring engine using NLP to reduce time-to-hire.',
+        techStack: ['Python', 'Spacy (NLP)', 'Flask', 'Selenium'],
+        githubUrl: 'https://github.com/sachinkumar25/recruitraptor',
+        demoUrl: '',
+        codeSnippet: `def score_candidate(resume_text, job_description):
+    """
+    Uses Named Entity Recognition (NER) to match skills.
+    """
+    resume_doc = nlp(resume_text)
+    job_doc = nlp(job_description)
+    
+    # Extract entities labeled as SKILLS or ORG
+    resume_skills = set([ent.text.lower() for ent in resume_doc.ents if ent.label_ == "SKILL"])
+    required_skills = set([ent.text.lower() for ent in job_doc.ents if ent.label_ == "SKILL"])
+    
+    match_score = len(resume_skills.intersection(required_skills)) / len(required_skills)
+    
+    return {
+        "score": round(match_score * 100, 2),
+        "missing_skills": list(required_skills - resume_skills),
+        "highlighted_matches": list(resume_skills.intersection(required_skills))
+    }`,
+    },
+    {
+        id: 'protechxion-sw',
+        title: 'ProTechXionSW',
+        description: 'Advanced security monitoring and threat detection system integrating intrusion detection.',
+        techStack: ['C++', 'Qt', 'OpenSSL', 'Wireshark Libs'],
+        githubUrl: 'https://github.com/sachinkumar25/ProTechXionSW',
+        demoUrl: '',
+        codeSnippet: `// Real-time packet inspection loop
+void PacketSniffer::startCapture() {
+    char errbuf[PCAP_ERRBUF_SIZE];
+    pcap_t* handle = pcap_open_live(device, BUFSIZ, 1, 1000, errbuf);
+    
+    if (handle == nullptr) {
+        throw std::runtime_error("Could not open device for sniffing");
+    }
 
-# Setup RAG Pipeline
-qa = RetrievalQA.from_chain_type(
-    llm=OpenAI(temperature=0),
-    chain_type="stuff",
-    retriever=vector_store.as_retriever()
-)
-
-query = "What are the Q3 risks?"
-response = qa.run(query)
-print(f"Answer: {response}")`,
+    // Capture loop
+    pcap_loop(handle, 0, [](u_char* args, const pcap_pkthdr* header, const u_char* packet) {
+        IPHeader* ip = (IPHeader*)(packet + 14); // Skip Ethernet header
+        
+        if (ThreatDatabase::isBlacklisted(ip->src_ip)) {
+            AlertSystem::trigger("Malicious IP Detected", ip->src_ip);
+            Firewall::block(ip->src_ip);
+        }
+    }, nullptr);
+}`,
     },
 ];

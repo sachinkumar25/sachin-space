@@ -13,7 +13,10 @@ export default function TrafficLights({ id }: TrafficLightsProps) {
     const { closeWindow, minimizeWindow, toggleMaximize } = useWindowStore();
 
     return (
-        <div className="flex gap-2 group">
+        <div
+            className="flex gap-2 group nodrag"
+            onPointerDown={(e) => e.stopPropagation()}
+        >
             {/* Close (Red) */}
             <button
                 onClick={(e) => {

@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import MenuBar from './MenuBar';
 import Dock from './Dock';
 import WindowManager from '../windows/WindowManager';
+import MobileOverlay from '../mobile/MobileOverlay';
 
 interface DesktopProps {
   children?: React.ReactNode;
@@ -29,6 +30,7 @@ export default function Desktop({ children }: DesktopProps) {
       </div>
 
       <Dock />
+      <MobileOverlay />
     </main>
   );
 }

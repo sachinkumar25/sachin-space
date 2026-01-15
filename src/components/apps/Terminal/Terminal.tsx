@@ -72,8 +72,13 @@ export default function TerminalApp() {
             term.focus(); // Force focus
         }, 100);
 
+        const isProcessing = useRef(false);
+
         // Input Handling
         term.onData(async (data) => {
+            // Drop input if we are waiting for AI
+            if (isProcessing.current) return;
+
             const charCode = data.charCodeAt(0);
 
             // Enter
@@ -91,6 +96,7 @@ export default function TerminalApp() {
                     } else {
                         // Phase 4: AI Fallback
                         term.write('\r\n(thinking...)\r\n');
+                        isProcessing.current = true; // Lock Input
 
                         const messages = [{ role: 'user', content: command }];
 
@@ -101,18 +107,29 @@ export default function TerminalApp() {
                                 body: JSON.stringify({ messages }),
                             });
 
+                            if (!res.ok) {
+                                throw new Error(`HTTP ${res.status}`);
+                            }
+
                             const data = await res.json();
 
                             if (data.error) {
-                                term.writeln('Error: Could not connect to AI.');
+                                term.writeln(`\r\n[System Error]: ${data.error}`);
                             } else if (data.type === 'action') {
                                 term.writeln(data.response); // e.g. "Opening projects..."
 
                                 const { useWindowStore } = await import('@/store/useWindowStore');
 
                                 if (data.tool === 'open_window' && data.params.appId) {
-                                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                    useWindowStore.getState().openWindow(data.params.appId as any);
+                                    const SUPPORTED_APPS = ['terminal', 'finder', 'projects', 'resume', 'vscode', 'mail', 'about'];
+
+                                    if (SUPPORTED_APPS.includes(data.params.appId)) {
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                        useWindowStore.getState().openWindow(data.params.appId as any);
+                                    } else {
+                                        term.writeln(`\r\nError: App '${data.params.appId}' not installed.`);
+                                    }
+
                                 } else if (data.tool === 'list_projects') {
                                     useWindowStore.getState().openWindow('projects');
                                 } else {
@@ -121,8 +138,11 @@ export default function TerminalApp() {
                             } else if (data.type === 'message') {
                                 term.writeln(data.content || '');
                             }
-                        } catch {
-                            term.writeln('Error: Could not connect to AI.');
+                        } catch (err) {
+                            term.writeln('\r\n[System Error]: Neural Link Disconnected. (Check API Key)');
+                            console.error(err);
+                        } finally {
+                            isProcessing.current = false; // Unlock Input
                         }
                     }
                 }

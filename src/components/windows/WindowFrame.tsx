@@ -22,6 +22,16 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
 
     const isMaximized = window.isMaximized;
 
+    // Mobile Lite Mode Logic
+    // We access globalThis.window because 'window' prop shadows the global object
+    const isMobile = typeof globalThis.window !== 'undefined' && globalThis.window.innerWidth < 768;
+
+    // Force maximize behavior on mobile
+    const effectivePosition = (isMaximized || isMobile) ? { x: 0, y: 32 } : window.position;
+    const effectiveSize = (isMaximized || isMobile) ? { width: '100vw', height: 'calc(100vh - 110px)' } : window.size; // 110px leaves room for dock + menu
+    const effectiveDisableDragging = isMaximized || isMobile;
+    const effectiveEnableResizing = !isMaximized && !isMobile;
+
     return (
         <AnimatePresence>
             {window.isOpen && !window.isMinimized && (
@@ -32,10 +42,10 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
                         width: window.size.width,
                         height: window.size.height,
                     }}
-                    position={isMaximized ? { x: 0, y: 32 } : window.position} // 32 is menu bar height
-                    size={isMaximized ? { width: '100%', height: 'calc(100vh - 32px)' } : window.size}
-                    disableDragging={isMaximized}
-                    enableResizing={!isMaximized}
+                    position={effectivePosition as any}
+                    size={effectiveSize as any}
+                    disableDragging={effectiveDisableDragging}
+                    enableResizing={effectiveEnableResizing}
                     onDragStart={() => focusWindow(window.id as AppID)}
                     onDragStop={(e, d) => {
                         setWindowPosition(window.id as AppID, { x: d.x, y: d.y });
@@ -51,6 +61,7 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
                     minHeight={200}
                     bounds="parent"
                     dragHandleClassName="window-header"
+                    cancel=".nodrag"
                     style={{ zIndex: window.zIndex }}
                     className="flex flex-col"
                 >
@@ -59,7 +70,7 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className={`w-full h-full flex flex-col rounded-xl overflow-hidden backdrop-blur-xl bg-gray-900/80 ring-1 ring-black/10 transition-all duration-200
+                        className={`w-full h-full flex flex-col rounded-xl overflow-hidden backdrop-blur-xl bg-gray-900/80 ring-1 ring-black/10 transition-all duration-200 pointer-events-auto
                         ${window.zIndex >= useWindowStore.getState().maxZIndex ? 'border-white/20 shadow-2xl' : 'border-white/5 shadow-lg opacity-90'}`}
                         onClick={() => focusWindow(window.id as AppID)}
                     >
@@ -86,7 +97,6 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
                                 // BUT we want to stop react-rnd from thinking this is a drag start 
                                 // (even though dragHandleClassName handles that, safety first)
                                 focusWindow(window.id as AppID);
-                                e.stopPropagation();
                             }}
                         >
                             {children}
