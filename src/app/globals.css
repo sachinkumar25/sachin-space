@@ -117,19 +117,23 @@
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+html {
+  /* Default Zoom Scaling (80%) */
+  /* This shrinks 1rem to 12.8px (from 16px), scaling down the whole UI */
+  font-size: 80%;
+}
+
 body {
   background: black;
   color: var(--foreground);
   font-family: var(--font-sans);
-  overflow: hidden;
-  line-height: 1.6;
-  /* Desktop simulation shouldn't scroll natively */
 
-  /* Default Zoom Scaling (80%) */
-  transform: scale(0.8);
-  transform-origin: top left;
-  width: 125%;
-  height: 125%;
+  /* Ensure full screen coverage */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  line-height: 1.6;
 }
 
 /* Shake Animation */
