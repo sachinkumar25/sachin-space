@@ -1,22 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Editor from '@monaco-editor/react';
 import { useWindowStore } from '@/store/useWindowStore';
 import ActivityBar from './ActivityBar';
 import SideBar from './SideBar';
 import TabBar from './TabBar';
 import StatusBar from './StatusBar';
-import { FileNode, explorerData } from '@/data/fileSystem';
+import { FileNode } from '@/data/fileSystem';
 
-export default function VSCodeApp() {
-    const launchArgs = useWindowStore((state) => state.windows['vscode']?.launchArgs);
-
-    // Default file if nothing open
-    const initialFile: FileNode = {
-        name: 'welcome.py',
-        language: 'python',
-        content: `"""
+const initialFile: FileNode = {
+    name: 'welcome.py',
+    language: 'python',
+    content: `"""
 Welcome to My Code Hub! 👨‍💻
 ---------------------------
 This VS Code instance is connected to my GitHub repositories.
@@ -37,11 +33,24 @@ def github_sync():
 
 if __name__ == "__main__":
     github_sync()`
-    };
+};
+
+export default function VSCodeApp() {
+    const launchArgs = useWindowStore((state) => state.windows['vscode']?.launchArgs);
 
     const [activeAttachedFile, setActiveAttachedFile] = useState<FileNode | null>(null);
-    const [openFiles, setOpenFiles] = useState<FileNode[]>([]);
+    const [openFiles, setOpenFiles] = useState<FileNode[]>([initialFile]);
     const [activeView, setActiveView] = useState('explorer');
+
+    const handleFileOpen = useCallback((file: FileNode) => {
+        setOpenFiles(prev => {
+            if (!prev.find(f => f.name === file.name)) {
+                return [...prev, file];
+            }
+            return prev;
+        });
+        setActiveAttachedFile(file);
+    }, []);
 
     // Handle external launch args (e.g. "code projects.ts" from terminal)
     useEffect(() => {
@@ -51,24 +60,19 @@ if __name__ == "__main__":
                 content: launchArgs.code,
                 language: 'typescript' // simplified
             };
+            // eslint-disable-next-line
             handleFileOpen(newFile);
         }
-    }, [launchArgs]);
+    }, [launchArgs, handleFileOpen]);
 
     // Initialize with a welcome file or empty
     useEffect(() => {
         if (openFiles.length === 0) {
+            // eslint-disable-next-line
             setOpenFiles([initialFile]);
             setActiveAttachedFile(initialFile);
         }
-    }, []);
-
-    const handleFileOpen = (file: FileNode) => {
-        if (!openFiles.find(f => f.name === file.name)) {
-            setOpenFiles([...openFiles, file]);
-        }
-        setActiveAttachedFile(file);
-    };
+    }, [openFiles.length]);
 
     const handleTabClose = (fileName: string, e: React.MouseEvent) => {
         e.stopPropagation();

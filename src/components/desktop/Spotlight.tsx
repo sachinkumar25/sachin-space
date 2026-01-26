@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Calculator, AppWindow, Folder, Briefcase } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Calculator, AppWindow, Briefcase, Search } from 'lucide-react';
 import { useWindowStore } from '@/store/useWindowStore';
 import { DOCK_APPS } from './Dock';
 import { projects } from '@/data/projects';
@@ -10,7 +9,7 @@ type ResultItem = {
     id: string;
     label: string;
     type: 'app' | 'project' | 'calc';
-    icon: any;
+    icon: React.ElementType;
     action: () => void;
     detail?: string;
 };
@@ -31,70 +30,72 @@ export default function Spotlight({ isOpen, onClose }: { isOpen: boolean; onClos
     }, [isOpen]);
 
     // Derived Results
-    const results: ResultItem[] = [];
+    const results: ResultItem[] = React.useMemo(() => {
+        const res: ResultItem[] = [];
 
-    if (query) {
-        const lowerQuery = query.toLowerCase();
+        if (query) {
+            const lowerQuery = query.toLowerCase();
 
-        // 1. Math Calculation (Naive)
-        if (/^[\d\s+\-*/().^]+$/.test(query)) {
-            try {
-                // eslint-disable-next-line
-                const val = eval(query);
-                if (!isNaN(val)) {
-                    results.push({
-                        id: 'calc',
-                        label: val.toString(),
-                        type: 'calc',
-                        icon: Calculator,
-                        action: () => { navigator.clipboard.writeText(val.toString()); onClose(); },
-                        detail: 'Result (Copy to Clipboard)'
+            // 1. Math Calculation (Naive)
+            if (/^[\d\s+\-*/().^]+$/.test(query)) {
+                try {
+                    // eslint-disable-next-line
+                    const val = eval(query);
+                    if (!isNaN(val)) {
+                        res.push({
+                            id: 'calc',
+                            label: val.toString(),
+                            type: 'calc',
+                            icon: Calculator,
+                            action: () => { navigator.clipboard.writeText(val.toString()); onClose(); },
+                            detail: 'Result (Copy to Clipboard)'
+                        });
+                    }
+                } catch { /* ignore */ }
+            }
+
+            // 2. Apps
+            DOCK_APPS.forEach(app => {
+                if (app.label.toLowerCase().includes(lowerQuery)) {
+                    res.push({
+                        id: `app-${app.id}`,
+                        label: app.label,
+                        type: 'app',
+                        icon: AppWindow, // Or use app.icon component if possible, but Lucide for consistency in list
+                        action: () => {
+                            if (app.externalUrl) {
+                                window.open(app.externalUrl, '_blank');
+                            } else {
+                                openWindow(app.id);
+                            }
+                            onClose();
+                        },
+                        detail: 'Application'
                     });
                 }
-            } catch (e) { /* ignore */ }
+            });
+
+            // 3. Projects
+            projects.forEach(p => {
+                if (p.title.toLowerCase().includes(lowerQuery) || p.description.toLowerCase().includes(lowerQuery)) {
+                    res.push({
+                        id: `proj-${p.id}`,
+                        label: p.title,
+                        type: 'project',
+                        icon: Briefcase,
+                        action: () => {
+                            // Open vscode? or Projects app?
+                            // Let's open Projects app for now
+                            openWindow('projects');
+                            onClose();
+                        },
+                        detail: 'Project'
+                    });
+                }
+            });
         }
-
-        // 2. Apps
-        DOCK_APPS.forEach(app => {
-            if (app.label.toLowerCase().includes(lowerQuery)) {
-                results.push({
-                    id: `app-${app.id}`,
-                    label: app.label,
-                    type: 'app',
-                    icon: AppWindow, // Or use app.icon component if possible, but Lucide for consistency in list
-                    action: () => {
-                        if (app.externalUrl) {
-                            window.open(app.externalUrl, '_blank');
-                        } else {
-                            // @ts-ignore
-                            openWindow(app.id);
-                        }
-                        onClose();
-                    },
-                    detail: 'Application'
-                });
-            }
-        });
-
-        // 3. Projects
-        projects.forEach(p => {
-            if (p.title.toLowerCase().includes(lowerQuery) || p.description.toLowerCase().includes(lowerQuery)) {
-                results.push({
-                    id: `proj-${p.id}`,
-                    label: p.title,
-                    type: 'project',
-                    icon: Briefcase,
-                    action: () => {
-                        // Open vscode? or Projects app?
-                        // Let's open Projects app for now
-                        openWindow('projects');
-                        onClose();
-                    },
-                    detail: 'Project'
-                });
-            }
-        });
-    }
+        return res;
+    }, [query, onClose, openWindow]);
 
     // Keyboard Navigation
     useEffect(() => {

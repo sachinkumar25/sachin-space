@@ -50,7 +50,10 @@ export default function DraggableDesktopIcon({
     initialPosition = { x: 0, y: 0 },
     gridSize = 100
 }: DraggableDesktopIconProps) {
-    const [position, setPosition] = useState(initialPosition);
+    const [position, setPosition] = useState(() => {
+        const saved = getSavedPositions()[id];
+        return saved || initialPosition;
+    });
     const [isDragging, setIsDragging] = useState(false);
     const [isSelected, setIsSelected] = useState(false);
     const hasMoved = useRef(false);
@@ -58,14 +61,6 @@ export default function DraggableDesktopIcon({
     // Motion values for smooth dragging
     const x = useMotionValue(0);
     const y = useMotionValue(0);
-
-    // Load saved position on mount
-    useEffect(() => {
-        const saved = getSavedPositions()[id];
-        if (saved) {
-            setPosition(saved);
-        }
-    }, [id]);
 
     // Reset motion values when position changes (after drag ends)
     useEffect(() => {

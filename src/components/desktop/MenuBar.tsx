@@ -4,11 +4,34 @@ import React, { useState, useEffect } from 'react';
 import { Apple, Wifi, Battery, Search, Command } from 'lucide-react';
 import { useWindowStore } from '@/store/useWindowStore';
 
+// Helper Components defined outside to avoid re-creation on render
+const MenuSeparator = () => <div className="h-[1px] bg-white/10 my-1 mx-2"></div>;
+
+const MenuItem = ({
+    label,
+    action,
+    shortcut,
+    onAction
+}: {
+    label: string,
+    action: string,
+    shortcut?: string,
+    onAction: (action: string) => void
+}) => (
+    <button
+        onClick={(e) => { e.stopPropagation(); onAction(action); }}
+        className="w-full text-left px-4 py-1 hover:bg-blue-600 hover:text-white transition-colors flex justify-between group"
+    >
+        <span>{label}</span>
+        {shortcut && <span className="text-gray-500 group-hover:text-white/80 ml-4">{shortcut}</span>}
+    </button>
+);
+
 export default function MenuBar() {
     const [time, setTime] = useState<string>('');
     const [dateStr, setDateStr] = useState<string>('');
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
-    const { toggleAbout, openWindow, closeWindow, toggleHero, toggleNotificationCenter } = useWindowStore();
+    const { toggleAbout, openWindow, toggleHero, toggleNotificationCenter } = useWindowStore();
 
     useEffect(() => {
         const updateTime = () => {
@@ -49,7 +72,7 @@ export default function MenuBar() {
 
             // File
             case 'resume': window.open('/resume.pdf', '_blank'); break;
-            case 'email': window.location.href = 'mailto:sskumar@umd.edu'; break;
+            case 'email': window.open('mailto:sskumar@umd.edu', '_self'); break;
 
             // View
             case 'showHero':
@@ -73,18 +96,6 @@ export default function MenuBar() {
         setActiveMenu(null);
     };
 
-    const MenuItem = ({ label, action, shortcut }: { label: string, action: string, shortcut?: string }) => (
-        <button
-            onClick={(e) => { e.stopPropagation(); handleAction(action); }}
-            className="w-full text-left px-4 py-1 hover:bg-blue-600 hover:text-white transition-colors flex justify-between group"
-        >
-            <span>{label}</span>
-            {shortcut && <span className="text-gray-500 group-hover:text-white/80 ml-4">{shortcut}</span>}
-        </button>
-    );
-
-    const MenuSeparator = () => <div className="h-[1px] bg-white/10 my-1 mx-2"></div>;
-
     return (
         <header className="absolute top-0 left-0 right-0 h-8 z-50 glass flex items-center justify-between px-4 text-xs font-medium select-none text-white/90">
             <div className="flex items-center gap-4 relative">
@@ -97,13 +108,13 @@ export default function MenuBar() {
                 </button>
                 {activeMenu === 'apple' && (
                     <div className="absolute top-8 left-0 w-56 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
-                        <MenuItem label="About This Mac" action="about" />
+                        <MenuItem label="About This Mac" action="about" onAction={handleAction} />
                         <MenuSeparator />
-                        <MenuItem label="System Settings..." action="none" />
+                        <MenuItem label="System Settings..." action="none" onAction={handleAction} />
                         <MenuSeparator />
-                        <MenuItem label="Sleep" action="sleep" />
-                        <MenuItem label="Restart..." action="restart" />
-                        <MenuItem label="Shut Down..." action="restart" />
+                        <MenuItem label="Sleep" action="sleep" onAction={handleAction} />
+                        <MenuItem label="Restart..." action="restart" onAction={handleAction} />
+                        <MenuItem label="Shut Down..." action="restart" onAction={handleAction} />
                     </div>
                 )}
 
@@ -114,11 +125,11 @@ export default function MenuBar() {
                     <button onClick={(e) => handleMenuClick(e, 'file')} className={`px-2 py-1 rounded hover:bg-white/10 ${activeMenu === 'file' ? 'bg-white/10' : ''}`}>File</button>
                     {activeMenu === 'file' && (
                         <div className="absolute top-8 left-0 w-48 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
-                            <MenuItem label="New Window" action="finder" shortcut="⌘N" />
-                            <MenuItem label="New Folder" action="none" shortcut="⇧⌘N" />
+                            <MenuItem label="New Window" action="finder" shortcut="⌘N" onAction={handleAction} />
+                            <MenuItem label="New Folder" action="none" shortcut="⇧⌘N" onAction={handleAction} />
                             <MenuSeparator />
-                            <MenuItem label="Download Resume" action="resume" />
-                            <MenuItem label="Email Me" action="email" />
+                            <MenuItem label="Download Resume" action="resume" onAction={handleAction} />
+                            <MenuItem label="Email Me" action="email" onAction={handleAction} />
                         </div>
                     )}
                 </div>
@@ -128,12 +139,12 @@ export default function MenuBar() {
                     <button onClick={(e) => handleMenuClick(e, 'edit')} className={`px-2 py-1 rounded hover:bg-white/10 ${activeMenu === 'edit' ? 'bg-white/10' : ''}`}>Edit</button>
                     {activeMenu === 'edit' && (
                         <div className="absolute top-8 left-0 w-48 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
-                            <MenuItem label="Undo" action="none" shortcut="⌘Z" />
-                            <MenuItem label="Redo" action="none" shortcut="⇧⌘Z" />
+                            <MenuItem label="Undo" action="none" shortcut="⌘Z" onAction={handleAction} />
+                            <MenuItem label="Redo" action="none" shortcut="⇧⌘Z" onAction={handleAction} />
                             <MenuSeparator />
-                            <MenuItem label="Cut" action="none" shortcut="⌘X" />
-                            <MenuItem label="Copy" action="none" shortcut="⌘C" />
-                            <MenuItem label="Paste" action="none" shortcut="⌘V" />
+                            <MenuItem label="Cut" action="none" shortcut="⌘X" onAction={handleAction} />
+                            <MenuItem label="Copy" action="none" shortcut="⌘C" onAction={handleAction} />
+                            <MenuItem label="Paste" action="none" shortcut="⌘V" onAction={handleAction} />
                         </div>
                     )}
                 </div>
@@ -143,10 +154,10 @@ export default function MenuBar() {
                     <button onClick={(e) => handleMenuClick(e, 'view')} className={`px-2 py-1 rounded hover:bg-white/10 ${activeMenu === 'view' ? 'bg-white/10' : ''}`}>View</button>
                     {activeMenu === 'view' && (
                         <div className="absolute top-8 left-0 w-48 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
-                            <MenuItem label="Enter Full Screen" action="fullscreen" shortcut="^⌘F" />
-                            <MenuItem label="Toggle Grayscale" action="sleep" />
+                            <MenuItem label="Enter Full Screen" action="fullscreen" shortcut="^⌘F" onAction={handleAction} />
+                            <MenuItem label="Toggle Grayscale" action="sleep" onAction={handleAction} />
                             <MenuSeparator />
-                            <MenuItem label="Show Summary Bar" action="showHero" />
+                            <MenuItem label="Show Summary Bar" action="showHero" onAction={handleAction} />
                         </div>
                     )}
                 </div>
@@ -156,12 +167,12 @@ export default function MenuBar() {
                     <button onClick={(e) => handleMenuClick(e, 'go')} className={`px-2 py-1 rounded hover:bg-white/10 ${activeMenu === 'go' ? 'bg-white/10' : ''}`}>Go</button>
                     {activeMenu === 'go' && (
                         <div className="absolute top-8 left-0 w-48 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
-                            <MenuItem label="Back" action="none" shortcut="⌘[" />
-                            <MenuItem label="Forward" action="none" shortcut="⌘]" />
+                            <MenuItem label="Back" action="none" shortcut="⌘[" onAction={handleAction} />
+                            <MenuItem label="Forward" action="none" shortcut="⌘]" onAction={handleAction} />
                             <MenuSeparator />
-                            <MenuItem label="Projects" action="projects" />
-                            <MenuItem label="GitHub" action="github" />
-                            <MenuItem label="LinkedIn" action="linkedin" />
+                            <MenuItem label="Projects" action="projects" onAction={handleAction} />
+                            <MenuItem label="GitHub" action="github" onAction={handleAction} />
+                            <MenuItem label="LinkedIn" action="linkedin" onAction={handleAction} />
                         </div>
                     )}
                 </div>
@@ -171,10 +182,10 @@ export default function MenuBar() {
                     <button onClick={(e) => handleMenuClick(e, 'window')} className={`px-2 py-1 rounded hover:bg-white/10 ${activeMenu === 'window' ? 'bg-white/10' : ''}`}>Window</button>
                     {activeMenu === 'window' && (
                         <div className="absolute top-8 left-0 w-48 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
-                            <MenuItem label="Minimize" action="none" shortcut="⌘M" />
-                            <MenuItem label="Zoom" action="none" />
+                            <MenuItem label="Minimize" action="none" shortcut="⌘M" onAction={handleAction} />
+                            <MenuItem label="Zoom" action="none" onAction={handleAction} />
                             <MenuSeparator />
-                            <MenuItem label="Bring All to Front" action="none" />
+                            <MenuItem label="Bring All to Front" action="none" onAction={handleAction} />
                         </div>
                     )}
                 </div>
@@ -184,10 +195,10 @@ export default function MenuBar() {
                     <button onClick={(e) => handleMenuClick(e, 'help')} className={`px-2 py-1 rounded hover:bg-white/10 ${activeMenu === 'help' ? 'bg-white/10' : ''}`}>Help</button>
                     {activeMenu === 'help' && (
                         <div className="absolute top-8 left-0 w-56 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
-                            <MenuItem label="Search" action="none" shortcut="⌘?" />
+                            <MenuItem label="Search" action="none" shortcut="⌘?" onAction={handleAction} />
                             <MenuSeparator />
-                            <MenuItem label="Terminal Tutorial" action="terminal" />
-                            <MenuItem label="View Source Code" action="repo" />
+                            <MenuItem label="Terminal Tutorial" action="terminal" onAction={handleAction} />
+                            <MenuItem label="View Source Code" action="repo" onAction={handleAction} />
                         </div>
                     )}
                 </div>

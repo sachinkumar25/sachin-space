@@ -13,9 +13,8 @@ export default function StickyNote() {
 
     return (
         <div
-            className={`absolute bottom-24 right-4 w-64 z-20 transition-all duration-300 ${
-                isPinned ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-            }`}
+            className={`absolute bottom-24 right-4 w-64 z-20 transition-all duration-300 ${isPinned ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                }`}
         >
             {/* Note Shadow */}
             <div className="absolute inset-0 bg-black/20 rounded-lg translate-y-1 translate-x-1 blur-sm" />
@@ -33,9 +32,8 @@ export default function StickyNote() {
                         </button>
                         <button
                             onClick={() => setIsPinned(!isPinned)}
-                            className={`w-3 h-3 rounded-full transition-colors flex items-center justify-center ${
-                                isPinned ? 'bg-green-500' : 'bg-yellow-600'
-                            }`}
+                            className={`w-3 h-3 rounded-full transition-colors flex items-center justify-center ${isPinned ? 'bg-green-500' : 'bg-yellow-600'
+                                }`}
                         >
                             <Pin size={6} className="text-white/70" />
                         </button>
@@ -53,7 +51,7 @@ export default function StickyNote() {
                     {/* Quick Info */}
                     <div className="space-y-1 text-xs mb-3 font-medium">
                         <p>SWE @ Capital One</p>
-                        <p>CS + Data Science Minor @ UMD '26</p>
+                        <p>CS + Data Science Minor @ UMD &apos;26</p>
                         <p className="text-amber-800">sskumar@umd.edu</p>
                     </div>
 
@@ -81,7 +79,7 @@ export default function StickyNote() {
 
                     {/* Handwritten Note Effect */}
                     <p className="mt-3 text-[10px] text-amber-800/70 italic">
-                        Let's build something great together!
+                        Let&apos;s build something great together!
                     </p>
                 </div>
 

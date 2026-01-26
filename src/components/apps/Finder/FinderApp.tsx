@@ -13,7 +13,7 @@ interface FileSystemItem {
     icon?: React.ElementType; // Override default icon
     content?: string; // For simple text files
     appId?: AppID; // Open specific app
-    args?: any; // Args for the app
+    args?: unknown; // Args for the app
     children?: FileSystemItem[]; // For folders
     color?: string; // Icon color
 }
@@ -159,7 +159,7 @@ export default function FinderApp() {
                     </button>
                     <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-sm text-gray-300 hover:bg-white/5">
                         <Monitor size={16} className="text-gray-400" />
-                        Sachin's MacBook Pro
+                        Sachin&apos;s MacBook Pro
                     </button>
                 </div>
             </div>

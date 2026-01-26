@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useWindowStore } from '@/store/useWindowStore';
 import { DOCK_APPS } from '@/components/desktop/Dock';
 import { Search, X } from 'lucide-react';
@@ -17,7 +18,7 @@ export default function LaunchpadApp() {
         if (externalUrl) {
             window.open(externalUrl, '_blank');
         } else {
-            // @ts-ignore
+            // @ts-expect-error - appId is dynamic
             openWindow(appId);
         }
         // Close launchpad after selection
@@ -59,11 +60,13 @@ export default function LaunchpadApp() {
                         <div className="w-[84px] h-[84px] md:w-[96px] md:h-[96px] rounded-[22px] transition-transform duration-200 group-hover:scale-105 active:scale-95 active:opacity-80 relative shadow-2xl">
                             {/* Icon Rendering Logic Matching Dock */}
                             {app.iconPath ? (
-                                <img
+                                <Image
                                     src={app.iconPath}
                                     alt={app.label}
+                                    width={96}
+                                    height={96}
                                     className="w-full h-full object-contain drop-shadow-xl"
-                                    onError={(e) => {
+                                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                                         e.currentTarget.style.display = 'none';
                                         e.currentTarget.parentElement?.classList.add('bg-gray-800/50', 'backdrop-blur-md', 'border', 'border-white/10', 'flex', 'items-center', 'justify-center');
                                     }}

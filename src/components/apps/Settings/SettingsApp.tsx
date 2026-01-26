@@ -142,7 +142,7 @@ export default function SettingsApp() {
     );
 }
 
-function SidebarItem({ icon: Icon, label, active, onClick }: { icon: any, label: string, active: boolean, onClick: () => void }) {
+function SidebarItem({ icon: Icon, label, active, onClick }: { icon: React.ElementType, label: string, active: boolean, onClick: () => void }) {
     return (
         <button
             onClick={onClick}

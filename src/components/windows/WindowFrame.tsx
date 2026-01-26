@@ -96,13 +96,13 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
         focusWindow(window.id as AppID);
     }, [focusWindow, window.id]);
 
-    const handleDrag = useCallback((e: any, d: any) => {
+    const handleDrag = useCallback((_e: unknown, d: { x: number, y: number }) => {
         // Detect snap zone based on cursor position
         const zone = detectSnapZone(d.x + 200, d.y + 20); // Offset for window header center
         setSnapZone(zone);
     }, []);
 
-    const handleDragStop = useCallback((e: any, d: any) => {
+    const handleDragStop = useCallback((_e: unknown, d: { x: number, y: number }) => {
         setIsDragging(false);
 
         // If we're in a snap zone, apply the snap
@@ -155,8 +155,8 @@ export default function WindowFrame({ window, children }: WindowFrameProps) {
                             width: window.size.width,
                             height: window.size.height,
                         }}
-                        position={effectivePosition as any}
-                        size={effectiveSize as any}
+                        position={effectivePosition}
+                        size={effectiveSize}
                         disableDragging={effectiveDisableDragging}
                         enableResizing={effectiveEnableResizing}
                         onDragStart={handleDragStart}

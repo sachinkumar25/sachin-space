@@ -1,22 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, Twitter, ChevronRight, X, Briefcase, GraduationCap, Code, Flame, RotateCcw, Brain, Terminal, Zap, FileText } from 'lucide-react';
+import { Github, Linkedin, Mail, Twitter, ChevronRight, X, Briefcase, GraduationCap, Code, Flame, Brain, Terminal, Zap, FileText } from 'lucide-react';
 import { useWindowStore } from '@/store/useWindowStore';
 
 export default function IntroModal() {
     const { isAboutOpen, toggleAbout } = useWindowStore();
-    const [view, setView] = React.useState<'main' | 'tech'>('main');
+    const [view, setView] = useState<'main' | 'tech'>('main');
 
     const handleEnter = () => {
         toggleAbout(false);
     };
 
-    // Reset view when closing/opening
-    React.useEffect(() => {
-        if (isAboutOpen) setView('main');
-    }, [isAboutOpen]);
+
 
     const techCategories = [
         {
@@ -96,7 +93,7 @@ export default function IntroModal() {
 
                                             <div className="flex-1">
                                                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
-                                                    Hi, I'm Sashvad (Sachin) Satishkumar
+                                                    Hi, I&apos;m Sashvad (Sachin) Satishkumar
                                                 </h1>
                                                 <p className="text-xl text-blue-400 font-medium mb-4 flex items-center gap-2">
                                                     <Code size={20} /> CS + Data Science Minor Student @ UMD
@@ -145,7 +142,7 @@ export default function IntroModal() {
                                                             Hey, I’m Sachin. I’m a CS + Data Science Minor student at UMD who is obsessed with building high-performance systems.
                                                         </p>
                                                         <p>
-                                                            Currently, I’m on the Technology Incubator team at Capital One, turning "generative AI" from a buzzword into reliable, cost-effective infrastructure. Before that, I was building satellite intelligence tools at AnaVation and engineering quant trading systems at Sentinel Capital.
+                                                            Currently, I’m on the Technology Incubator team at Capital One, turning &quot;generative AI&quot; from a buzzword into reliable, cost-effective infrastructure. Before that, I was building satellite intelligence tools at AnaVation and engineering quant trading systems at Sentinel Capital.
                                                         </p>
                                                         <p>
                                                             I’ve actually been doing this for a while! I started researching bioinformatics and geospatial data back in high school (at Dartmouth and GMU), which gave me a deep appreciation for messy data and rigorous testing.
@@ -274,7 +271,7 @@ export default function IntroModal() {
 }
 
 // Sub-components for cleaner code
-function StatCard({ number, label, icon: Icon, color = "text-blue-400", onClick }: { number: string; label: string; icon: any; color?: string; onClick?: () => void }) {
+function StatCard({ number, label, icon: Icon, color = "text-blue-400", onClick }: { number: string; label: string; icon: React.ElementType; color?: string; onClick?: () => void }) {
     return (
         <div
             onClick={onClick}
@@ -295,18 +292,9 @@ function Badge({ children }: { children: React.ReactNode }) {
     );
 }
 
-function HighlightItem({ children }: { children: React.ReactNode }) {
-    return (
-        <li className="flex items-start gap-3 text-gray-300">
-            <div className="mt-1 min-w-[20px] h-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                <span className="text-green-500 text-xs">✓</span>
-            </div>
-            <span>{children}</span>
-        </li>
-    );
-}
 
-function SocialIcon({ icon: Icon, url }: { icon: any, url: string }) {
+
+function SocialIcon({ icon: Icon, url }: { icon: React.ElementType, url: string }) {
     return (
         <a
             href={url}

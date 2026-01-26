@@ -8,10 +8,11 @@ export default function ExperienceApp() {
     const experiences = activeTab === 'career' ? careerExperiences : schoolExperiences;
     const [selectedId, setSelectedId] = useState<string>(experiences[0].id);
 
-    // Reset selection when switching tabs
-    useEffect(() => {
-        setSelectedId(experiences[0].id);
-    }, [activeTab]);
+    const handleTabChange = (tab: 'career' | 'school') => {
+        setActiveTab(tab);
+        const newExperiences = tab === 'career' ? careerExperiences : schoolExperiences;
+        setSelectedId(newExperiences[0].id);
+    };
 
     const selectedExperience = experiences.find(e => e.id === selectedId) || experiences[0];
 
@@ -29,20 +30,20 @@ export default function ExperienceApp() {
                     {/* Segmented Control */}
                     <div className="grid grid-cols-2 bg-[#1A1A1A] p-0.5 rounded-lg border border-white/5">
                         <button
-                            onClick={() => setActiveTab('career')}
+                            onClick={() => handleTabChange('career')}
                             className={`flex justify-center items-center gap-2 py-1.5 rounded-[5px] text-[11px] font-medium transition-all ${activeTab === 'career'
-                                    ? 'bg-[#404040] text-white shadow-sm ring-1 ring-white/10'
-                                    : 'text-white/50 hover:text-white'
+                                ? 'bg-[#404040] text-white shadow-sm ring-1 ring-white/10'
+                                : 'text-white/50 hover:text-white'
                                 }`}
                         >
                             <Briefcase size={12} />
                             Career
                         </button>
                         <button
-                            onClick={() => setActiveTab('school')}
+                            onClick={() => handleTabChange('school')}
                             className={`flex justify-center items-center gap-2 py-1.5 rounded-[5px] text-[11px] font-medium transition-all ${activeTab === 'school'
-                                    ? 'bg-[#404040] text-white shadow-sm ring-1 ring-white/10'
-                                    : 'text-white/50 hover:text-white'
+                                ? 'bg-[#404040] text-white shadow-sm ring-1 ring-white/10'
+                                : 'text-white/50 hover:text-white'
                                 }`}
                         >
                             <School size={12} />
@@ -58,8 +59,8 @@ export default function ExperienceApp() {
                             key={exp.id}
                             onClick={() => setSelectedId(exp.id)}
                             className={`w-full text-left p-3 rounded-lg transition-colors flex flex-col gap-0.5 ${selectedId === exp.id
-                                    ? 'bg-macos-blue text-white'
-                                    : 'hover:bg-white/5 text-white/90'
+                                ? 'bg-macos-blue text-white'
+                                : 'hover:bg-white/5 text-white/90'
                                 }`}
                         >
                             <span className={`text-[13px] font-semibold leading-tight ${selectedId === exp.id ? 'text-white' : 'text-white/90'}`}>

@@ -324,7 +324,7 @@ export default function MailApp({ initialMessage }: MailAppProps) {
     );
 }
 
-function SidebarItem({ icon: Icon, label, count, active, onClick }: { icon: any, label: string, count?: number, active?: boolean, onClick: () => void }) {
+function SidebarItem({ icon: Icon, label, count, active, onClick }: { icon: React.ElementType, label: string, count?: number, active?: boolean, onClick: () => void }) {
     return (
         <button
             onClick={onClick}

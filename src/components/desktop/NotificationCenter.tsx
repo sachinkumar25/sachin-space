@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useWindowStore } from '@/store/useWindowStore';
-import { FileText, Github, Linkedin, Mail, ExternalLink, Battery, Wifi, Bluetooth } from 'lucide-react';
+import { FileText, Github, Linkedin, Mail, ExternalLink, Battery, Wifi } from 'lucide-react';
 import Image from 'next/image';
 
 export default function NotificationCenter() {
@@ -108,7 +108,7 @@ export default function NotificationCenter() {
     );
 }
 
-function ActionButton({ icon: Icon, label, onClick }: { icon: any, label: string, onClick: () => void }) {
+function ActionButton({ icon: Icon, label, onClick }: { icon: React.ElementType, label: string, onClick: () => void }) {
     return (
         <button
             onClick={onClick}

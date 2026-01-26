@@ -43,10 +43,11 @@ export async function POST(request: Request) {
         console.log('Notification Email sent:', info.messageId);
         return NextResponse.json({ success: true, sid: info.messageId });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Email Notification Failed:', error);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return NextResponse.json(
-            { error: 'Failed to send email notification', details: error.message },
+            { error: 'Failed to send email notification', details: errorMessage },
             { status: 500 }
         );
     }

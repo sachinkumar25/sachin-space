@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FileText, Github, Linkedin, X } from 'lucide-react';
 import { useWindowStore } from '@/store/useWindowStore';
 
