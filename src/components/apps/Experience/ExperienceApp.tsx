@@ -80,52 +80,49 @@ export default function ExperienceApp() {
             {/* Content Area (Detail) */}
             <div className="flex-1 flex flex-col bg-[#1e1e1e]">
                 {/* Header */}
-                <div className="h-14 border-b border-white/5 flex items-center px-8 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full">
-                    <div className="flex flex-col">
-                        <h1 className="text-lg font-sf-display font-semibold text-white tracking-tight">
-                            {selectedExperience.role}
-                        </h1>
-                        <span className="text-xs text-macos-blue font-medium flex items-center gap-1.5">
-                            {selectedExperience.company}
-                        </span>
-                    </div>
+                <div className="border-b border-white/5 px-8 py-6 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full">
+                    <h1 className="text-2xl font-sf-display font-bold text-white tracking-tight mb-1">
+                        {selectedExperience.role}
+                    </h1>
+                    <span className="text-base text-macos-blue font-medium">
+                        {selectedExperience.company}
+                    </span>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-8 pb-16">
-                    <div className="max-w-3xl">
+                    <div>
                         {/* Meta Data Grid */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
-                            <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-                                <span className="text-xs text-white/40 block mb-1.5">Duration</span>
-                                <div className="flex items-center gap-2 text-sm text-white/90">
-                                    <Calendar size={14} className="text-macos-orange" />
+                        <div className="grid grid-cols-3 gap-6 mb-10">
+                            <div className="bg-white/5 rounded-xl p-5 border border-white/5 hover:bg-white/[0.07] transition-colors">
+                                <span className="text-xs text-white/40 block mb-2 uppercase tracking-wide">Duration</span>
+                                <div className="flex items-center gap-2.5 text-base text-white/90 font-medium">
+                                    <Calendar size={16} className="text-macos-orange" />
                                     {selectedExperience.date}
                                 </div>
                             </div>
-                            <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-                                <span className="text-xs text-white/40 block mb-1.5">Location</span>
-                                <div className="flex items-center gap-2 text-sm text-white/90">
-                                    <MapPin size={14} className="text-macos-red" />
+                            <div className="bg-white/5 rounded-xl p-5 border border-white/5 hover:bg-white/[0.07] transition-colors">
+                                <span className="text-xs text-white/40 block mb-2 uppercase tracking-wide">Location</span>
+                                <div className="flex items-center gap-2.5 text-base text-white/90 font-medium">
+                                    <MapPin size={16} className="text-macos-red" />
                                     {selectedExperience.location}
                                 </div>
                             </div>
-                            <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-                                <span className="text-xs text-white/40 block mb-1.5">Type</span>
-                                <div className="flex items-center gap-2 text-sm text-white/90">
-                                    <Globe size={14} className="text-macos-teal" />
+                            <div className="bg-white/5 rounded-xl p-5 border border-white/5 hover:bg-white/[0.07] transition-colors">
+                                <span className="text-xs text-white/40 block mb-2 uppercase tracking-wide">Type</span>
+                                <div className="flex items-center gap-2.5 text-base text-white/90 font-medium">
+                                    <Globe size={16} className="text-macos-teal" />
                                     {activeTab === 'career' ? 'Professional' : 'Extracurricular'}
                                 </div>
                             </div>
                         </div>
 
                         {/* Description */}
-                        <div className="prose prose-invert max-w-none">
-                            <h3 className="text-sm font-semibold text-white mb-3">Role Overview</h3>
-                            {/* Using mac-card for the main content block for emphasis */}
-                            <div className="mac-card p-6 rounded-xl mb-8">
-                                <ul className="list-disc list-outside ml-4 space-y-3 text-sm leading-relaxed text-white/80 marker:text-macos-blue">
+                        <div className="mb-10">
+                            <h3 className="text-sm font-semibold text-white/60 mb-4 uppercase tracking-wider">Role Overview</h3>
+                            <div className="mac-card p-6 rounded-xl">
+                                <ul className="list-disc list-outside ml-5 space-y-4 text-base leading-relaxed text-white/80 marker:text-macos-blue">
                                     {selectedExperience.description.map((item, i) => (
-                                        <li key={i} className="pl-1">{item}</li>
+                                        <li key={i} className="pl-2">{item}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -134,10 +131,10 @@ export default function ExperienceApp() {
                         {/* Skills */}
                         {selectedExperience.skills.length > 0 && (
                             <div>
-                                <h3 className="text-xs font-semibold text-white/50 mb-3 uppercase tracking-wider">Technologies & Skills</h3>
-                                <div className="flex flex-wrap gap-2">
+                                <h3 className="text-sm font-semibold text-white/60 mb-4 uppercase tracking-wider">Technologies & Skills</h3>
+                                <div className="flex flex-wrap gap-2.5">
                                     {selectedExperience.skills.map((skill, i) => (
-                                        <span key={i} className="mac-badge text-xs">
+                                        <span key={i} className="px-4 py-2 bg-white/5 text-white/80 text-sm font-medium rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
                                             {skill}
                                         </span>
                                     ))}

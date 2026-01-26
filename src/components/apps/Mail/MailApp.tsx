@@ -273,23 +273,23 @@ export default function MailApp({ initialMessage }: MailAppProps) {
 
                             {/* Form */}
                             <div className="flex-1 flex flex-col bg-[#1e1e1e]">
-                                <div className="flex items-center gap-2 px-4 py-2 border-b border-white/5">
-                                    <span className="text-[13px] text-white/40 w-12 text-right">To:</span>
+                                <div className="flex items-center px-4 py-2.5 border-b border-white/5">
+                                    <label className="text-sm text-white/40 min-w-[70px]">To:</label>
                                     <input
-                                        className="flex-1 bg-transparent border-none outline-none text-[13px] text-white"
+                                        className="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-white/30"
                                         placeholder="Recipient"
                                         value={draftData.to}
                                         onChange={e => setDraftData({ ...draftData, to: e.target.value })}
                                     />
                                 </div>
-                                <div className="flex items-center gap-2 px-4 py-2 border-b border-white/5">
-                                    <span className="text-[13px] text-white/40 w-12 text-right">Cc:</span>
-                                    <input className="flex-1 bg-transparent border-none outline-none text-[13px] text-white" />
+                                <div className="flex items-center px-4 py-2.5 border-b border-white/5">
+                                    <label className="text-sm text-white/40 min-w-[70px]">Cc:</label>
+                                    <input className="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-white/30" />
                                 </div>
-                                <div className="flex items-center gap-2 px-4 py-2 border-b border-white/5">
-                                    <span className="text-[13px] text-white/40 w-12 text-right">Subject:</span>
+                                <div className="flex items-center px-4 py-2.5 border-b border-white/5">
+                                    <label className="text-sm text-white/40 min-w-[70px]">Subject:</label>
                                     <input
-                                        className="flex-1 bg-transparent border-none outline-none text-[13px] text-white"
+                                        className="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-white/30"
                                         placeholder="Enter subject"
                                         value={draftData.subject}
                                         onChange={e => setDraftData({ ...draftData, subject: e.target.value })}

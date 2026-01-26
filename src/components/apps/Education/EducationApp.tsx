@@ -38,41 +38,39 @@ export default function EducationApp() {
             {/* Content Area (Detail) */}
             <div className="flex-1 flex flex-col bg-[#1e1e1e]">
                 {/* Header */}
-                <div className="h-14 border-b border-white/5 flex items-center px-8 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full">
-                    <div className="flex flex-col">
-                        <h1 className="text-lg font-sf-display font-semibold text-white tracking-tight">
-                            {selectedEdu.company}
-                        </h1>
-                        <span className="text-xs text-macos-blue font-medium flex items-center gap-1.5">
-                            {selectedEdu.role}
-                        </span>
-                    </div>
+                <div className="border-b border-white/5 px-8 py-6 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full">
+                    <h1 className="text-2xl font-sf-display font-bold text-white tracking-tight mb-1">
+                        {selectedEdu.company}
+                    </h1>
+                    <span className="text-base text-macos-blue font-medium">
+                        {selectedEdu.role}
+                    </span>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-8 pb-16">
-                    <div className="max-w-3xl">
+                    <div>
                         {/* Meta Data */}
-                        <div className="flex gap-8 mb-8 text-sm text-white/60 border-b border-white/5 pb-6">
-                            <div className="flex items-center gap-2">
-                                <Calendar size={14} /> {selectedEdu.date}
+                        <div className="flex gap-10 mb-10 text-base text-white/60 border-b border-white/5 pb-6">
+                            <div className="flex items-center gap-2.5">
+                                <Calendar size={16} className="text-macos-orange" /> {selectedEdu.date}
                             </div>
-                            <div className="flex items-center gap-2">
-                                <MapPin size={14} /> {selectedEdu.location}
+                            <div className="flex items-center gap-2.5">
+                                <MapPin size={16} className="text-macos-red" /> {selectedEdu.location}
                             </div>
                         </div>
 
                         {/* Content Parsing Loop */}
-                        <div className="space-y-8">
+                        <div className="space-y-10">
                             {selectedEdu.description.map((item, i) => {
                                 if (item.startsWith('GPA:')) {
                                     return (
-                                        <div key={i} className="mac-card p-6 rounded-xl flex items-center gap-4">
-                                            <div className="bg-macos-green/20 p-3 rounded-lg text-macos-green">
-                                                <GraduationCap size={20} />
+                                        <div key={i} className="mac-card p-6 rounded-xl flex items-center gap-5">
+                                            <div className="bg-macos-green/20 p-4 rounded-xl text-macos-green">
+                                                <GraduationCap size={24} />
                                             </div>
                                             <div>
-                                                <div className="text-xs text-white/50 uppercase tracking-wider font-semibold">GPA Score</div>
-                                                <div className="text-lg font-sf-display font-bold text-white">{item.replace('GPA: ', '')}</div>
+                                                <div className="text-xs text-white/50 uppercase tracking-wider font-semibold mb-1">GPA Score</div>
+                                                <div className="text-2xl font-sf-display font-bold text-white">{item.replace('GPA: ', '')}</div>
                                             </div>
                                         </div>
                                     )
@@ -80,10 +78,10 @@ export default function EducationApp() {
                                 if (item.startsWith('Academic Distinctions:') || item.startsWith('Honors & Awards:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-sm font-semibold text-white mb-3">
-                                                <Trophy size={14} className="text-macos-yellow" /> Awards & Honors
+                                            <h3 className="flex items-center gap-2.5 text-sm font-semibold text-white/60 mb-4 uppercase tracking-wider">
+                                                <Trophy size={16} className="text-macos-yellow" /> Awards & Honors
                                             </h3>
-                                            <div className="mac-card p-6 rounded-xl text-sm leading-relaxed text-white/80">
+                                            <div className="mac-card p-6 rounded-xl text-base leading-relaxed text-white/80">
                                                 {item.split(':')[1]}
                                             </div>
                                         </div>
@@ -92,10 +90,10 @@ export default function EducationApp() {
                                 if (item.startsWith('Activities & Societies:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-sm font-semibold text-white mb-3">
-                                                <Users size={14} className="text-macos-blue" /> Activities
+                                            <h3 className="flex items-center gap-2.5 text-sm font-semibold text-white/60 mb-4 uppercase tracking-wider">
+                                                <Users size={16} className="text-macos-blue" /> Activities
                                             </h3>
-                                            <div className="mac-card p-6 rounded-xl text-sm leading-relaxed text-white/80">
+                                            <div className="mac-card p-6 rounded-xl text-base leading-relaxed text-white/80">
                                                 {item.split(':')[1]}
                                             </div>
                                         </div>
@@ -104,12 +102,12 @@ export default function EducationApp() {
                                 if (item.startsWith('Relevant Coursework:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-sm font-semibold text-white mb-3">
-                                                <BookOpen size={14} className="text-macos-red" /> Coursework
+                                            <h3 className="flex items-center gap-2.5 text-sm font-semibold text-white/60 mb-4 uppercase tracking-wider">
+                                                <BookOpen size={16} className="text-macos-red" /> Coursework
                                             </h3>
-                                            <div className="flex flex-wrap gap-2">
+                                            <div className="flex flex-wrap gap-2.5">
                                                 {item.split(':')[1].split(',').map((course, idx) => (
-                                                    <span key={idx} className="mac-badge text-xs">
+                                                    <span key={idx} className="px-4 py-2 bg-white/5 text-white/80 text-sm font-medium rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
                                                         {course.trim()}
                                                     </span>
                                                 ))}
@@ -118,7 +116,7 @@ export default function EducationApp() {
                                     )
                                 }
                                 return (
-                                    <p key={i} className="text-white/70 leading-relaxed text-sm">{item}</p>
+                                    <p key={i} className="text-white/70 leading-relaxed text-base">{item}</p>
                                 );
                             })}
                         </div>
