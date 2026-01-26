@@ -25,7 +25,7 @@ export default function SafariApp() {
                 </div>
 
                 <div className="flex-1 max-w-2xl mx-auto flex items-center justify-center relative group">
-                    <div className="w-full bg-[#1e1e1e] rounded-lg h-8 flex items-center justify-center text-sm text-white/90 shadow-sm border border-transparent group-hover:border-white/10 transition-all cursor-text relative">
+                    <div className="w-full bg-[#1e1e1e] rounded-lg h-8 flex items-center justify-center text-[13px] text-white/90 shadow-sm border border-transparent group-hover:border-white/10 transition-all cursor-text relative">
                         <Lock size={12} className="text-white/50 mr-2" />
                         <span className="selection:bg-macos-blue selection:text-white">{url}</span>
                         <RotateCw size={12} className="absolute right-3 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity" />

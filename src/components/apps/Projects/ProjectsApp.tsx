@@ -66,7 +66,7 @@ export default function ProjectsApp() {
         <div className="h-full flex flex-col bg-[#1e1e1e] text-white">
             {/* Header / Tabs */}
             <div className="sticky top-0 z-20 bg-[#1e1e1e]/80 backdrop-blur-xl border-b border-white/5 py-4 px-6 flex items-center justify-between">
-                <h2 className="text-xl font-sf-display font-semibold tracking-tight text-white/90 hidden md:block">
+                <h2 className="text-[17px] font-sf-display font-semibold tracking-tight text-white/90 hidden md:block">
                     {activeTab === 'projects' ? 'My Work' : 'Research'}
                 </h2>
 
@@ -75,8 +75,8 @@ export default function ProjectsApp() {
                     <button
                         onClick={() => setActiveTab('projects')}
                         className={`flex items-center gap-2 px-6 py-1.5 rounded-[6px] text-[13px] font-medium transition-all ${activeTab === 'projects'
-                                ? 'bg-[#606060]/50 text-white shadow-sm'
-                                : 'text-white/60 hover:text-white/80 hover:bg-white/5'
+                            ? 'bg-[#606060]/50 text-white shadow-sm'
+                            : 'text-white/60 hover:text-white/80 hover:bg-white/5'
                             }`}
                     >
                         <Briefcase size={14} />
@@ -85,8 +85,8 @@ export default function ProjectsApp() {
                     <button
                         onClick={() => setActiveTab('publications')}
                         className={`flex items-center gap-2 px-6 py-1.5 rounded-[6px] text-[13px] font-medium transition-all ${activeTab === 'publications'
-                                ? 'bg-[#606060]/50 text-white shadow-sm'
-                                : 'text-white/60 hover:text-white/80 hover:bg-white/5'
+                            ? 'bg-[#606060]/50 text-white shadow-sm'
+                            : 'text-white/60 hover:text-white/80 hover:bg-white/5'
                             }`}
                     >
                         <BookOpen size={14} />
@@ -126,10 +126,10 @@ export default function ProjectsApp() {
                                     {/* Header / Title */}
                                     <div className="p-5 flex items-start justify-between relative">
                                         <div>
-                                            <h3 className="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                                            <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors">
                                                 {project.title}
                                             </h3>
-                                            <p className="text-sm text-gray-300 mt-2 line-clamp-2">
+                                            <p className="text-[13px] text-gray-300 mt-2 line-clamp-2">
                                                 {project.description}
                                             </p>
                                         </div>
@@ -198,7 +198,7 @@ export default function ProjectsApp() {
 
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-start justify-between gap-2">
-                                                <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors leading-tight line-clamp-3">
+                                                <h3 className="text-[15px] font-bold text-white group-hover:text-blue-300 transition-colors leading-tight line-clamp-3">
                                                     {pub.title}
                                                 </h3>
                                             </div>

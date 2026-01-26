@@ -144,7 +144,7 @@ export default function FinderApp() {
                                     setCurrentPath(['Home']);
                                 }
                             }}
-                            className={`w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-sm transition-colors ${item.active ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-white/5'
+                            className={`w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-[13px] transition-colors ${item.active ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-white/5'
                                 }`}
                         >
                             <item.icon size={16} className={item.active ? 'text-white' : 'text-blue-400'} />
@@ -153,11 +153,11 @@ export default function FinderApp() {
                     ))}
 
                     <div className="mt-4 px-2 mb-2 text-xs font-semibold text-gray-400 pl-2">Locations</div>
-                    <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-sm text-gray-300 hover:bg-white/5">
+                    <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-[13px] text-gray-300 hover:bg-white/5">
                         <HardDrive size={16} className="text-gray-400" />
                         Macintosh HD
                     </button>
-                    <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-sm text-gray-300 hover:bg-white/5">
+                    <button className="w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-[13px] text-gray-300 hover:bg-white/5">
                         <Monitor size={16} className="text-gray-400" />
                         Sachin&apos;s MacBook Pro
                     </button>
@@ -185,7 +185,7 @@ export default function FinderApp() {
                         </button>
                     </div>
 
-                    <div className="text-sm font-semibold text-gray-300 flex items-center gap-1">
+                    <div className="text-[13px] font-semibold text-gray-300 flex items-center gap-1">
                         <Folder size={14} className="text-blue-400" />
                         {currentPath[currentPath.length - 1]}
                     </div>

@@ -222,7 +222,7 @@ export default function MailApp({ initialMessage }: MailAppProps) {
                         <div className="flex-1 overflow-y-auto p-8 max-w-4xl mx-auto w-full">
                             <div className="flex justify-between items-start mb-6 border-b border-white/5 pb-4">
                                 <div>
-                                    <h1 className="text-xl font-sf-display font-semibold mb-2 text-white">{selectedEmail.subject}</h1>
+                                    <h1 className="text-lg font-sf-display font-semibold mb-2 text-white">{selectedEmail.subject}</h1>
                                     <div className="flex items-center gap-3">
                                         <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${selectedEmail.avatarColor || 'from-gray-500 to-gray-700'} flex items-center justify-center text-xs font-medium text-white shadow-lg`}>
                                             {selectedEmail.from.substring(0, 2).toUpperCase()}
@@ -235,7 +235,7 @@ export default function MailApp({ initialMessage }: MailAppProps) {
                                 </div>
                                 <span className="text-[12px] text-white/40">{selectedEmail.time}</span>
                             </div>
-                            <div className="whitespace-pre-wrap text-[14px] leading-relaxed text-white/80 font-sf-text">
+                            <div className="whitespace-pre-wrap text-[13px] leading-relaxed text-white/80 font-sf-text">
                                 {selectedEmail.body}
                             </div>
                         </div>
@@ -296,7 +296,7 @@ export default function MailApp({ initialMessage }: MailAppProps) {
                                     />
                                 </div>
                                 <textarea
-                                    className="flex-1 bg-transparent border-none outline-none p-4 text-[14px] leading-relaxed resize-none font-sf-text text-white"
+                                    className="flex-1 bg-transparent border-none outline-none p-4 text-[13px] leading-relaxed resize-none font-sf-text text-white"
                                     placeholder="Write your message..."
                                     value={draftData.message}
                                     onChange={e => setDraftData({ ...draftData, message: e.target.value })}
