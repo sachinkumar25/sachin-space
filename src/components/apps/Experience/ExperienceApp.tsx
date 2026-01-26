@@ -82,10 +82,10 @@ export default function ExperienceApp() {
                 {/* Header */}
                 <div className="h-14 border-b border-white/5 flex items-center px-8 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full mb-6">
                     <div className="flex flex-col">
-                        <h1 className="text-[17px] font-sf-display font-semibold text-white tracking-tight">
+                        <h1 className="text-[15px] font-sf-display font-semibold text-white tracking-tight">
                             {selectedExperience.role}
                         </h1>
-                        <span className="text-[12px] text-macos-blue font-medium flex items-center gap-1.5">
+                        <span className="text-[11px] text-macos-blue font-medium flex items-center gap-1.5">
                             {selectedExperience.company}
                         </span>
                     </div>
@@ -120,10 +120,10 @@ export default function ExperienceApp() {
 
                         {/* Description */}
                         <div className="prose prose-invert max-w-none">
-                            <h3 className="text-[15px] font-semibold text-white mb-4">Role Overview</h3>
+                            <h3 className="text-[13px] font-semibold text-white mb-2">Role Overview</h3>
                             {/* Using mac-card for the main content block for emphasis */}
-                            <div className="mac-card p-6 rounded-2xl mb-8">
-                                <ul className="list-disc list-outside ml-4 space-y-3 text-[14px] leading-relaxed text-white/80 marker:text-macos-blue">
+                            <div className="mac-card p-4 rounded-xl mb-6">
+                                <ul className="list-disc list-outside ml-4 space-y-2 text-[13px] leading-relaxed text-white/80 marker:text-macos-blue">
                                     {selectedExperience.description.map((item, i) => (
                                         <li key={i} className="pl-1">{item}</li>
                                     ))}
@@ -134,10 +134,10 @@ export default function ExperienceApp() {
                         {/* Skills */}
                         {selectedExperience.skills.length > 0 && (
                             <div>
-                                <h3 className="text-[13px] font-semibold text-white/50 mb-3 uppercase tracking-wider">Technologies & Skills</h3>
+                                <h3 className="text-[11px] font-semibold text-white/50 mb-2 uppercase tracking-wider">Technologies & Skills</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {selectedExperience.skills.map((skill, i) => (
-                                        <span key={i} className="mac-badge">
+                                        <span key={i} className="mac-badge text-[11px]">
                                             {skill}
                                         </span>
                                     ))}

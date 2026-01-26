@@ -40,10 +40,10 @@ export default function EducationApp() {
                 {/* Header */}
                 <div className="h-14 border-b border-white/5 flex items-center px-8 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full mb-6">
                     <div className="flex flex-col">
-                        <h1 className="text-[17px] font-sf-display font-semibold text-white tracking-tight">
+                        <h1 className="text-[15px] font-sf-display font-semibold text-white tracking-tight">
                             {selectedEdu.company}
                         </h1>
-                        <span className="text-[12px] text-macos-blue font-medium flex items-center gap-1.5">
+                        <span className="text-[11px] text-macos-blue font-medium flex items-center gap-1.5">
                             {selectedEdu.role}
                         </span>
                     </div>
@@ -71,8 +71,8 @@ export default function EducationApp() {
                                                 <GraduationCap size={20} />
                                             </div>
                                             <div>
-                                                <div className="text-[11px] text-white/50 uppercase tracking-wider font-semibold">GPA Score</div>
-                                                <div className="text-[17px] font-sf-display font-bold text-white">{item.replace('GPA: ', '')}</div>
+                                                <div className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">GPA Score</div>
+                                                <div className="text-[15px] font-sf-display font-bold text-white">{item.replace('GPA: ', '')}</div>
                                             </div>
                                         </div>
                                     )
@@ -80,10 +80,10 @@ export default function EducationApp() {
                                 if (item.startsWith('Academic Distinctions:') || item.startsWith('Honors & Awards:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-[15px] font-semibold text-white mb-3">
-                                                <Trophy size={16} className="text-macos-yellow" /> Awards & Honors
+                                            <h3 className="flex items-center gap-2 text-[13px] font-semibold text-white mb-2">
+                                                <Trophy size={14} className="text-macos-yellow" /> Awards & Honors
                                             </h3>
-                                            <div className="mac-card p-5 rounded-2xl text-[14px] leading-relaxed text-white/80">
+                                            <div className="mac-card p-4 rounded-xl text-[13px] leading-relaxed text-white/80">
                                                 {item.split(':')[1]}
                                             </div>
                                         </div>
@@ -92,10 +92,10 @@ export default function EducationApp() {
                                 if (item.startsWith('Activities & Societies:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-[15px] font-semibold text-white mb-3">
-                                                <Users size={16} className="text-macos-blue" /> Activities
+                                            <h3 className="flex items-center gap-2 text-[13px] font-semibold text-white mb-2">
+                                                <Users size={14} className="text-macos-blue" /> Activities
                                             </h3>
-                                            <div className="mac-card p-5 rounded-2xl text-[14px] leading-relaxed text-white/80">
+                                            <div className="mac-card p-4 rounded-xl text-[13px] leading-relaxed text-white/80">
                                                 {item.split(':')[1]}
                                             </div>
                                         </div>
@@ -104,12 +104,12 @@ export default function EducationApp() {
                                 if (item.startsWith('Relevant Coursework:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-[15px] font-semibold text-white mb-3">
-                                                <BookOpen size={16} className="text-macos-red" /> Coursework
+                                            <h3 className="flex items-center gap-2 text-[13px] font-semibold text-white mb-2">
+                                                <BookOpen size={14} className="text-macos-red" /> Coursework
                                             </h3>
                                             <div className="flex flex-wrap gap-2">
                                                 {item.split(':')[1].split(',').map((course, idx) => (
-                                                    <span key={idx} className="mac-badge">
+                                                    <span key={idx} className="mac-badge text-[11px]">
                                                         {course.trim()}
                                                     </span>
                                                 ))}
@@ -118,7 +118,7 @@ export default function EducationApp() {
                                     )
                                 }
                                 return (
-                                    <p key={i} className="text-white/70 leading-relaxed text-[14px]">{item}</p>
+                                    <p key={i} className="text-white/70 leading-relaxed text-[13px]">{item}</p>
                                 );
                             })}
                         </div>
