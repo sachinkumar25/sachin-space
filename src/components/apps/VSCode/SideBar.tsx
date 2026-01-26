@@ -71,7 +71,7 @@ export default function SideBar({ onFileSelect, visible }: SideBarProps) {
     };
 
     return (
-        <div className="w-60 bg-[#252526] text-white flex flex-col border-r border-black/10">
+        <div className="w-48 bg-[#252526] text-white flex flex-col border-r border-black/10">
             <div className="uppercase text-xs font-bold text-[#bbbbbb] px-4 py-2.5 tracking-wide">
                 Explorer
             </div>

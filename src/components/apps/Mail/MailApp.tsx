@@ -256,7 +256,7 @@ export default function MailApp({ initialMessage }: MailAppProps) {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="bg-[#2C2C2C] w-full max-w-2xl rounded-xl shadow-2xl border border-white/10 overflow-hidden flex flex-col h-[500px]"
+                            className="bg-[#2C2C2C] w-full max-w-2xl rounded-xl shadow-2xl border border-white/10 overflow-hidden flex flex-col h-[90%]"
                         >
                             {/* Modal Header */}
                             <div className="h-12 bg-[#3A3A3A] border-b border-white/10 flex items-center justify-between px-4">
