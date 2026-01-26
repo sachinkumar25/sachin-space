@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, Twitter, ChevronRight, X, Briefcase, GraduationCap, Code, Flame, Brain, Terminal, Zap, FileText } from 'lucide-react';
 import { useWindowStore } from '@/store/useWindowStore';
@@ -8,10 +8,17 @@ import { useWindowStore } from '@/store/useWindowStore';
 export default function IntroModal() {
     const { isAboutOpen, toggleAbout } = useWindowStore();
     const [view, setView] = useState<'main' | 'tech'>('main');
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleEnter = () => {
         toggleAbout(false);
     };
+
+    if (!mounted) return null;
 
 
 
