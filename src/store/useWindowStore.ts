@@ -19,6 +19,12 @@ interface WindowStore {
     // Desktop Widgets State
     isAboutOpen: boolean;
     toggleAbout: (isOpen?: boolean) => void;
+
+    isHeroVisible: boolean;
+    toggleHero: (isVisible?: boolean) => void;
+
+    isNotificationCenterOpen: boolean;
+    toggleNotificationCenter: (isOpen?: boolean) => void;
 }
 
 const INITIAL_WINDOW_STATE: Omit<WindowState, 'id' | 'title' | 'zIndex'> = {
@@ -71,6 +77,13 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
             mail: 'Mail',
             messages: 'Messages',
             github: 'GitHub',
+            launchpad: 'Launchpad',
+            safari: 'Safari',
+            photos: 'Photos',
+            calendar: 'Calendar',
+            settings: 'Settings',
+            experience: 'Experience',
+            education: 'Education',
         };
 
         const newZIndex = maxZIndex + 1;
@@ -92,7 +105,7 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
                             const height = 600; // Default height
                             return {
                                 x: Math.max(0, (window.innerWidth - width) / 2),
-                                y: Math.max(0, (window.innerHeight - height) / 2 - 50) // Slightly above center for visual balance
+                                y: Math.max(0, (window.innerHeight - height) / 2 + 5) // Slight adjustment (5px) to clear hero banner without being too low
                             };
                         }
                         return { x: 100 + (newZIndex % 10) * 20, y: 50 + (newZIndex % 10) * 20 };
@@ -193,6 +206,20 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
     toggleAbout: (isOpen) => {
         set((state) => ({
             isAboutOpen: isOpen !== undefined ? isOpen : !state.isAboutOpen,
+        }));
+    },
+
+    isHeroVisible: true,
+    toggleHero: (isVisible) => {
+        set((state) => ({
+            isHeroVisible: isVisible !== undefined ? isVisible : !state.isHeroVisible,
+        }));
+    },
+
+    isNotificationCenterOpen: false,
+    toggleNotificationCenter: (isOpen) => {
+        set((state) => ({
+            isNotificationCenterOpen: isOpen !== undefined ? isOpen : !state.isNotificationCenterOpen,
         }));
     },
 }));

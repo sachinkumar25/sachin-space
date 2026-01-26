@@ -4,7 +4,7 @@
   /* System Colors */
   --background: #000000;
   --foreground: #ffffff;
-  
+
   /* macOS Colors */
   --macos-blue: #0A84FF;
   --macos-gray: #98989D;
@@ -14,7 +14,7 @@
   --macos-orange: #FF9F0A;
   --macos-purple: #BF5AF2;
   --macos-teal: #64D2FF;
-  
+
   /* System UI Colors */
   --system-bg: rgba(0, 0, 0, 0.5);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -23,7 +23,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   --color-macos-blue: var(--macos-blue);
   --color-macos-gray: var(--macos-gray);
   --color-macos-red: var(--macos-red);
@@ -32,11 +32,11 @@
   --color-macos-orange: var(--macos-orange);
   --color-macos-purple: var(--macos-purple);
   --color-macos-teal: var(--macos-teal);
-  
+
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  
-  --shadow-window: 0 0 0 1px rgba(0,0,0,0.1), 0 20px 50px rgba(0,0,0,0.3);
-  --shadow-dock: 0 0 0 1px rgba(255,255,255,0.1), 0 10px 30px rgba(0,0,0,0.3);
+
+  --shadow-window: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 20px 50px rgba(0, 0, 0, 0.3);
+  --shadow-dock: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Glassmorphism Utilities */
@@ -54,9 +54,103 @@
   border: 1px solid var(--glass-border);
 }
 
+@utility mac-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.28, 0, 0.42, 1);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+@utility mac-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-family: var(--font-sf-text);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.2s cubic-bezier(0.28, 0, 0.42, 1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(10, 132, 255, 0.3);
+    color: var(--macos-blue);
+    transform: translateY(-1px);
+  }
+}
+
+@utility font-sf-display {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+@utility font-sf-text {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.3), 0 0 8px rgba(48, 209, 88, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.5), 0 0 16px rgba(48, 209, 88, 0.6);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
 body {
   background: black;
   color: var(--foreground);
   font-family: var(--font-sans);
-  overflow: hidden; /* Desktop simulation shouldn't scroll natively */
+  overflow: hidden;
+  line-height: 1.6;
+  /* Desktop simulation shouldn't scroll natively */
+}
+
+/* Shake Animation */
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
 }

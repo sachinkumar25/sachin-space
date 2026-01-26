@@ -18,7 +18,7 @@ export default function DesktopIcon({ label, icon: Icon, onClick, imageSrc, clas
             onClick={onClick}
         >
             <div className={`
-                ${imageSrc ? 'w-24 h-24 rounded-full border-2 border-white/20 shadow-2xl' : 'w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg'} 
+                ${imageSrc ? 'w-16 h-16 rounded-2xl border border-white/10 shadow-lg' : 'w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg'} 
                 flex items-center justify-center text-white group-active:scale-95 transition-transform overflow-hidden bg-black/20
             `}>
                 {imageSrc ? (

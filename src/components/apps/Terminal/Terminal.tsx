@@ -59,8 +59,14 @@ export default function TerminalApp() {
         fitAddonRef.current = fitAddon;
 
         // Initial greeting
-        term.writeln('\x1b[1;32mWelcome to SachinOS Terminal v1.0\x1b[0m');
-        term.writeln('Type "tutorial" for a quick start guide or "help" for commands.');
+        term.writeln('\x1b[1;36m┌─────────────────────────────────────────────┐\x1b[0m');
+        term.writeln('\x1b[1;36m│\x1b[0m  SACHIN KUMAR                               \x1b[1;36m│\x1b[0m');
+        term.writeln('\x1b[1;36m│\x1b[0m  SWE @ Capital One | CS+Math @ UMD          \x1b[1;36m│\x1b[0m');
+        term.writeln('\x1b[1;36m│\x1b[0m                                             \x1b[1;36m│\x1b[0m');
+        term.writeln('\x1b[1;36m│\x1b[0m  Type \'\x1b[1;33mhelp\x1b[0m\' for commands                   \x1b[1;36m│\x1b[0m');
+        term.writeln('\x1b[1;36m│\x1b[0m  Type \'\x1b[1;33mprojects\x1b[0m\' to see my work             \x1b[1;36m│\x1b[0m');
+        term.writeln('\x1b[1;36m│\x1b[0m  Type \'\x1b[1;33mcontact\x1b[0m\' for ways to reach me        \x1b[1;36m│\x1b[0m');
+        term.writeln('\x1b[1;36m└─────────────────────────────────────────────┘\x1b[0m');
         term.write('\r\n$ ');
 
         // Handle Resize

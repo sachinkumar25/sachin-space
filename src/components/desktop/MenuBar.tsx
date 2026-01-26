@@ -8,7 +8,7 @@ export default function MenuBar() {
     const [time, setTime] = useState<string>('');
     const [dateStr, setDateStr] = useState<string>('');
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
-    const { toggleAbout, openWindow, closeWindow } = useWindowStore();
+    const { toggleAbout, openWindow, closeWindow, toggleHero, toggleNotificationCenter } = useWindowStore();
 
     useEffect(() => {
         const updateTime = () => {
@@ -49,9 +49,13 @@ export default function MenuBar() {
 
             // File
             case 'resume': window.open('/resume.pdf', '_blank'); break;
-            case 'email': window.location.href = 'mailto:sachinsk141@gmail.com'; break;
+            case 'email': window.location.href = 'mailto:sskumar@umd.edu'; break;
 
             // View
+            case 'showHero':
+                toggleHero(true);
+                localStorage.removeItem('hero-dismissed');
+                break;
             case 'fullscreen':
                 if (!document.fullscreenElement) document.documentElement.requestFullscreen();
                 else document.exitFullscreen();
@@ -141,6 +145,8 @@ export default function MenuBar() {
                         <div className="absolute top-8 left-0 w-48 bg-[#1e1e1e]/90 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-1 flex flex-col z-50">
                             <MenuItem label="Enter Full Screen" action="fullscreen" shortcut="^⌘F" />
                             <MenuItem label="Toggle Grayscale" action="sleep" />
+                            <MenuSeparator />
+                            <MenuItem label="Show Summary Bar" action="showHero" />
                         </div>
                     )}
                 </div>
@@ -194,7 +200,10 @@ export default function MenuBar() {
                     <Search size={14} className="text-white/80" />
                     <Command size={14} className="text-white/80" />
                 </div>
-                <div className="flex gap-2">
+                <div
+                    className="flex gap-2 hover:bg-white/10 p-1 rounded transition-colors cursor-pointer"
+                    onClick={() => toggleNotificationCenter()}
+                >
                     <span className="hidden sm:block">{dateStr}</span>
                     <span>{time}</span>
                 </div>

@@ -13,7 +13,10 @@ export const parseCommand = (input: string): string | null => {
 
     switch (command) {
         case 'help':
-            return '\r\nAvailable Commands:\r\n  help       : Show this help message\r\n  tutorial   : A guide to using SachinOS Terminal\r\n  ls         : List files and directories\r\n  cd <dir>   : Change directory\r\n  cat <file> : Read file content\r\n  open <app> : Launch an application\r\n  clear      : Clear the screen';
+            return '\r\nAvailable Commands:\r\n  help       : Show this help message\r\n  tutorial   : A guide to using SachinOS Terminal\r\n  shortcuts  : Show keyboard shortcuts\r\n  ls         : List files and directories\r\n  cd <dir>   : Change directory\r\n  cat <file> : Read file content\r\n  open <app> : Launch an application\r\n  clear      : Clear the screen';
+
+        case 'shortcuts':
+            return '\r\n⌨️  Keyboard Shortcuts\r\n----------------------\r\n  ⌘ + P    : Open Projects\r\n  ⌘ + R    : Open Resume\r\n  ⌘ + I    : About Me\r\n  ?        : Toggle Shortcuts Overlay\r\n  Esc      : Close Window';
 
         case 'tutorial':
             return '\r\n🎓 SachinOS Terminal Tutorial\r\n--------------------------------\r\nThis terminal allows you to interact with the portfolio using text commands.\r\n\r\n1. Navigation:\r\n   - Type "ls" to see what is in the current folder.\r\n   - Type "cd <folder>" to go into a folder (e.g. "cd projects").\r\n   - Type "cd .." to go back up.\r\n\r\n2. Opening Apps:\r\n   - You can launch any app by typing "open <appname>".\r\n   - Try: "open vscode" or "open mail".\r\n\r\n3. AI Assistant:\r\n   - If a command is not recognized, it is sent to the AI!\r\n   - You can ask natural questions like:\r\n     "Who is Sachin?"\r\n     "Show me your react projects"\r\n     "Contact info"\r\n\r\nType "help" at any time for a refresher.';

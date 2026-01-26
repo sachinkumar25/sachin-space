@@ -99,7 +99,7 @@ export default function IntroModal() {
                                                     Hi, I'm Sashvad (Sachin) Satishkumar
                                                 </h1>
                                                 <p className="text-xl text-blue-400 font-medium mb-4 flex items-center gap-2">
-                                                    <Code size={20} /> CS + Math Student @ UMD
+                                                    <Code size={20} /> CS + Data Science Minor Student @ UMD
                                                 </p>
                                                 <p className="text-gray-400 text-lg flex items-center gap-2 mb-6">
                                                     <GraduationCap size={18} /> University of Maryland, College Park
@@ -142,7 +142,7 @@ export default function IntroModal() {
                                                     </h3>
                                                     <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed text-lg space-y-4">
                                                         <p>
-                                                            Hey, I’m Sachin. I’m a CS + Math student at UMD who is obsessed with building high-performance systems.
+                                                            Hey, I’m Sachin. I’m a CS + Data Science Minor student at UMD who is obsessed with building high-performance systems.
                                                         </p>
                                                         <p>
                                                             Currently, I’m on the Technology Incubator team at Capital One, turning "generative AI" from a buzzword into reliable, cost-effective infrastructure. Before that, I was building satellite intelligence tools at AnaVation and engineering quant trading systems at Sentinel Capital.
@@ -206,7 +206,7 @@ export default function IntroModal() {
                                                     <div className="pt-4 flex justify-between items-center border-t border-white/10 mt-2">
                                                         <SocialIcon icon={Github} url="https://github.com/sachinkumar25" />
                                                         <SocialIcon icon={Linkedin} url="https://linkedin.com/in/sachinsatishkumar" />
-                                                        <SocialIcon icon={Mail} url="mailto:sachinsk141@gmail.com" />
+                                                        <SocialIcon icon={Mail} url="mailto:sskumar@umd.edu" />
                                                         <SocialIcon icon={Twitter} url="#" />
                                                     </div>
                                                 </div>

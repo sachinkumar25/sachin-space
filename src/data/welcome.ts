@@ -1,18 +1,34 @@
 export const welcomeMessage = {
-    subject: "Welcome to my Interactive Portfolio! 🚀",
-    from: "Sachin Satishkumar <system@portfolio.os>",
-    body: `Hi there! Welcome to my macOS simulation.
+    id: 'welcome-1',
+    sender: 'Sachin (Portfolio Bot)',
+    subject: 'Start Here: Navigation Guide 🗺️',
+    body: `
+👋 **Welcome to SachinOS!**
 
-**What is this?**
-This is a fully interactive portfolio built with **Next.js 15, TypeScript, and Tailwind CSS**. It uses **Zustand** for state management and an **AI-powered Terminal** (OpenAI) to help you navigate.
+I created this interactive desktop to show, not just tell, what I can do as a Full Stack Engineer.
 
-**How to explore:**
-- 🧠 **Terminal:** Ask the AI questions like 'Show me your Python projects' or use real commands like \`ls\` and \`cat\`.
-- 💼 **Projects:** View my case studies (EcoNavix, Tributum, etc.). Click 'View Code' to see the actual source in VS Code!
-- 📄 **Resume:** View my official CV in the PDF viewer.
-- 📝 **VS Code:** A read-only editor to inspect my code snippets.
+**🚀 How to Navigate:**
+1. **The Terminal (Centerpiece):** It's not just for looks!
+   - *Natural Language:* Ask "What is Sachin's experience with Python?"
+   - *Commands:* Try \`ls\`, \`cat about.txt\`, or \`open projects\`.
+   - *AI Powered:* It uses GPT-4 to control the UI.
 
-Feel free to drag windows, explore the dock, and test the AI. Enjoy!
+2. **The Apps:**
+   - **Projects:** Interactive cards. **Pro Tip:** Click "View Code" to open the VS Code app and read the actual source!
+   - **Resume:** Clean PDF viewer (downloadable).
+   - **Finder:** Explore the file system structure.
 
-- Sachin`
+**📬 Want to chat?**
+The input box below is hooked up to my **real phone** via Twilio.
+If you leave a message, it comes straight to me.
+
+**Please include:**
+- Your Name
+- Your Email/Phone
+- How I can help you
+
+Type below to start! 👇
+  `,
+    timestamp: new Date().toISOString(),
+    read: false
 };
