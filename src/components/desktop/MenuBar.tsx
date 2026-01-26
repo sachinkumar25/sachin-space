@@ -212,6 +212,7 @@ export default function MenuBar() {
                     <Command size={14} className="text-white/80" />
                 </div>
                 <div
+                    id="nc-trigger"
                     className="flex gap-2 hover:bg-white/10 p-1 rounded transition-colors cursor-pointer"
                     onClick={() => toggleNotificationCenter()}
                 >

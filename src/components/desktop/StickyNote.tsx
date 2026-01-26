@@ -73,7 +73,7 @@ export default function StickyNote() {
                         <StickyButton
                             icon={Mail}
                             label="Contact"
-                            onClick={() => openWindow('messages')}
+                            onClick={() => openWindow('mail')}
                         />
                     </div>
 

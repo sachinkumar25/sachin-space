@@ -32,7 +32,7 @@ const INITIAL_WINDOW_STATE: Omit<WindowState, 'id' | 'title' | 'zIndex'> = {
     isMinimized: false,
     isMaximized: false,
     position: { x: 100, y: 50 },
-    size: { width: 800, height: 600 },
+    size: { width: 700, height: 500 },
 };
 
 export const useWindowStore = create<WindowStore>((set, get) => ({
@@ -101,16 +101,16 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
                     // Calculate center position if needed
                     position: state.windows[id]?.position || (() => {
                         if (typeof window !== 'undefined' && id === 'messages') {
-                            const width = 800; // Default width
-                            const height = 600; // Default height
+                            const width = 700; // Reduced default width
+                            const height = 500; // Reduced default height
                             return {
                                 x: Math.max(0, (window.innerWidth - width) / 2),
-                                y: Math.max(0, (window.innerHeight - height) / 2 + 5) // Slight adjustment (5px) to clear hero banner without being too low
+                                y: Math.max(0, (window.innerHeight - height) / 2 + 5)
                             };
                         }
                         return { x: 100 + (newZIndex % 10) * 20, y: 50 + (newZIndex % 10) * 20 };
                     })(),
-                    size: state.windows[id]?.size || (id === 'projects' ? { width: 1100, height: 800 } : { width: 800, height: 600 }),
+                    size: state.windows[id]?.size || (id === 'projects' ? { width: 900, height: 600 } : { width: 700, height: 500 }),
                     launchArgs: args, // Set initial args
                 },
             },

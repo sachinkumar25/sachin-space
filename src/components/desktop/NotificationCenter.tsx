@@ -11,13 +11,11 @@ export default function NotificationCenter() {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (isNotificationCenterOpen && panelRef.current && !panelRef.current.contains(event.target as Node)) {
-                // Don't close if clicking the clock (trigger) - handled by bubbling check or distinct event
-                // Ideally the clock click stops propagation, but for safely, we just check if it's the specific panel area
-                // Actually, simplest is to just let the desktop click handler close it if we want strictness,
-                // but usually we want to click *anywhere* else.
-
-                // Check if target is NOT inside the clock (which has specific ID or class ideally, but we'll rely on the menu bar handling its own clicks)
-                // For now, let's just close it.
+                // Ignore clicks on the toggle button in MenuBar (we'll add ID 'nc-trigger' to it)
+                const trigger = document.getElementById('nc-trigger');
+                if (trigger && trigger.contains(event.target as Node)) {
+                    return;
+                }
                 toggleNotificationCenter(false);
             }
         };

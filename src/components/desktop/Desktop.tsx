@@ -94,12 +94,16 @@ export default function Desktop({ children }: DesktopProps) {
       <div className="relative z-0 w-full h-full pt-8 pb-20">
         {/* Desktop Icons Area */}
         {children}
+
+        {/* Widgets Layer (Lower Priority) */}
+        <DesktopWidgets />
+        <StickyNote />
+
+        {/* Windows Layer (Higher Priority - Z-Index managed by window store) */}
         <WindowManager />
       </div>
 
       <Dock />
-      <DesktopWidgets />
-      <StickyNote />
       <NotificationCenter />
       <IntroModal />
       <MobileOverlay />
