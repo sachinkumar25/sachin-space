@@ -1,10 +1,30 @@
 import { OpenAI } from 'openai';
 import { NextRequest, NextResponse } from 'next/server';
 import { ChatCompletionTool } from 'openai/resources/chat/completions';
+import { Ratelimit } from '@upstash/ratelimit';
+import { kv } from '@vercel/kv';
+import { z } from 'zod';
+import { verifyOrigin } from '@/lib/auth';
 
 // Initialize OpenAI
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
+});
+
+// Zod Schema for Input Validation
+const chatSchema = z.object({
+    messages: z.array(
+        z.object({
+            role: z.enum(['user', 'assistant', 'system']),
+            content: z.string().max(1000, "Message too long").refine(s => s.trim().length > 0, "Empty message"),
+        })
+    ).max(10, "Too many messages in history"),
+});
+
+// Rate Limiter (5 requests per 60 seconds)
+const ratelimit = new Ratelimit({
+    redis: kv,
+    limiter: Ratelimit.slidingWindow(5, '60 s'),
 });
 
 // Define Tools Schema
@@ -46,8 +66,36 @@ const tools: ChatCompletionTool[] = [
 ];
 
 export async function POST(req: NextRequest) {
+    // 1. Internal API Protection (Origin Check)
+    if (!verifyOrigin(req)) {
+        return NextResponse.json({ error: 'Unauthorized Origin' }, { status: 403 });
+    }
+
+    // 2. Rate Limiting
+    // Identify by IP
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const ip = (req as any).ip ?? req.headers.get('x-forwarded-for') ?? '127.0.0.1';
+
+    // Only run rate limiting if KV is configured (to avoid crashing in dev if variables missing)
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        const { success } = await ratelimit.limit(ip);
+        if (!success) {
+            return NextResponse.json({ error: 'Rate limit exceeded. Try again later.' }, { status: 429 });
+        }
+    } else {
+        console.warn('Rate Limiting disabled: KV_REST_API_URL or KV_REST_API_TOKEN missing.');
+    }
+
     try {
-        const { messages } = await req.json();
+        const body = await req.json();
+
+        // 3. Input Validation
+        const parseResult = chatSchema.safeParse(body);
+        if (!parseResult.success) {
+            return NextResponse.json({ error: 'Invalid input', details: parseResult.error }, { status: 400 });
+        }
+
+        const { messages } = parseResult.data;
 
         // System Prompt
         const systemMessage = {

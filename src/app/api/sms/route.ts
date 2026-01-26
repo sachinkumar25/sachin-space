@@ -1,12 +1,25 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { z } from 'zod';
+import { verifyOrigin } from '@/lib/auth';
+
+// Zod Schema
+const smsSchema = z.object({
+    message: z.string().min(1, "Message cannot be empty").max(2000, "Message too long"),
+    sender: z.string().max(100, "Sender name too long").optional(),
+});
 
 // Environment variables for Gmail/SMTP
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_PASS;
 const myPhoneNumber = process.env.MY_PHONE_NUMBER;
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+    // 1. Internal API Protection
+    if (!verifyOrigin(request)) {
+        return NextResponse.json({ error: 'Unauthorized Origin' }, { status: 403 });
+    }
+
     console.log('--- SMS (via T-Mobile Email) Attempt ---');
 
     if (!emailUser || !emailPass || !myPhoneNumber) {
@@ -18,7 +31,14 @@ export async function POST(request: Request) {
     }
 
     try {
-        const { message, sender } = await request.json();
+        const body = await request.json();
+
+        const parseResult = smsSchema.safeParse(body);
+        if (!parseResult.success) {
+            return NextResponse.json({ error: 'Invalid input', details: parseResult.error }, { status: 400 });
+        }
+
+        const { message, sender } = parseResult.data;
 
         // Target: Send to your own email
         const targetEmail = emailUser;
