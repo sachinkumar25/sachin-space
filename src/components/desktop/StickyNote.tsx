@@ -13,7 +13,7 @@ export default function StickyNote() {
 
     return (
         <div
-            className={`absolute bottom-24 right-4 w-64 z-20 transition-all duration-300 ${isPinned ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+            className={`absolute bottom-24 right-4 w-52 z-20 transition-all duration-300 ${isPinned ? 'opacity-100' : 'opacity-80 hover:opacity-100'
                 }`}
         >
             {/* Note Shadow */}

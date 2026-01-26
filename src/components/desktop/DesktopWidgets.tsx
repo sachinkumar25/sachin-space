@@ -8,7 +8,7 @@ export default function DesktopWidgets() {
     const { openWindow, toggleAbout } = useWindowStore();
 
     return (
-        <div className="absolute right-4 top-12 w-72 flex flex-col gap-3 z-10 pointer-events-none">
+        <div className="absolute right-4 top-12 w-60 flex flex-col gap-3 z-10 pointer-events-none">
             {/* Profile Widget */}
             <div className="pointer-events-auto bg-black/40 backdrop-blur-2xl rounded-2xl border border-white/10 p-4 shadow-2xl">
                 {/* Header */}
