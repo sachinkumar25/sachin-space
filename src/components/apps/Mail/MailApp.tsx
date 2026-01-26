@@ -112,7 +112,7 @@ export default function MailApp({ initialMessage }: MailAppProps) {
         <div className="flex h-full w-full bg-[#1e1e1e] text-white/90 font-sf-text selection:bg-macos-blue selection:text-white relative overflow-hidden">
 
             {/* 1. Sidebar (Mailboxes) */}
-            <div className="w-[200px] flex-shrink-0 bg-[#2C2C2C]/50 backdrop-blur-xl border-r border-white/10 flex flex-col pt-10 md:pt-0 transition-all">
+            <div className="w-[140px] flex-shrink-0 bg-[#2C2C2C]/50 backdrop-blur-xl border-r border-white/10 flex flex-col pt-10 md:pt-0 transition-all">
                 {/* Traffic Lights Spacing */}
                 <div className="h-10 hidden md:block" />
 
@@ -149,7 +149,7 @@ export default function MailApp({ initialMessage }: MailAppProps) {
             </div>
 
             {/* 2. Message List */}
-            <div className="w-[300px] flex-shrink-0 bg-[#1e1e1e] border-r border-white/10 flex flex-col">
+            <div className="w-[180px] flex-shrink-0 bg-[#1e1e1e] border-r border-white/10 flex flex-col">
                 <div className="h-12 border-b border-white/5 flex items-center px-4 justify-between bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10">
                     <span className="font-semibold text-[13px] capitalize">{selectedFolder}</span>
                     <button onClick={() => setIsComposeOpen(true)}>

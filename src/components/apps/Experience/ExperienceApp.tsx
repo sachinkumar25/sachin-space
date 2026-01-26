@@ -19,7 +19,7 @@ export default function ExperienceApp() {
     return (
         <div className="flex h-full w-full bg-[#1e1e1e] font-sf-text text-white/90 selection:bg-macos-blue selection:text-white">
             {/* Sidebar (Master) */}
-            <div className="w-[280px] flex-shrink-0 flex flex-col border-r border-white/10 bg-[#2C2C2C]/50 backdrop-blur-xl">
+            <div className="w-[200px] flex-shrink-0 flex flex-col border-r border-white/10 bg-[#2C2C2C]/50 backdrop-blur-xl">
                 {/* Traffic Lights Placeholder (handled by window decoration, but spacing needed if custom header) */}
                 {/* For now, assuming Window Frame takes care of traffic lights styling, we just need padding */}
 

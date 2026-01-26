@@ -10,7 +10,7 @@ export default function EducationApp() {
     return (
         <div className="flex h-full w-full bg-[#1e1e1e] font-sf-text text-white/90 selection:bg-macos-blue selection:text-white">
             {/* Sidebar (Master) */}
-            <div className="w-[280px] flex-shrink-0 flex flex-col border-r border-white/10 bg-[#2C2C2C]/50 backdrop-blur-xl">
+            <div className="w-[200px] flex-shrink-0 flex flex-col border-r border-white/10 bg-[#2C2C2C]/50 backdrop-blur-xl">
                 <div className="p-4 border-b border-white/5">
                     <h2 className="text-[13px] font-sf-display font-semibold text-white/50 px-2 mb-2">Education</h2>
                 </div>
@@ -20,8 +20,8 @@ export default function EducationApp() {
                             key={edu.id}
                             onClick={() => setSelectedId(edu.id)}
                             className={`w-full text-left p-3 rounded-lg transition-colors flex flex-col gap-0.5 ${selectedId === edu.id
-                                    ? 'bg-macos-blue text-white'
-                                    : 'hover:bg-white/5 text-white/90'
+                                ? 'bg-macos-blue text-white'
+                                : 'hover:bg-white/5 text-white/90'
                                 }`}
                         >
                             <span className={`text-[13px] font-semibold leading-tight ${selectedId === edu.id ? 'text-white' : 'text-white/90'}`}>

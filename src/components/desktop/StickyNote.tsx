@@ -59,7 +59,7 @@ export default function StickyNote() {
                     <div className="border-t border-amber-500/30 my-2" />
 
                     {/* Quick Actions */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap justify-center">
                         <StickyButton
                             icon={FileText}
                             label="Resume"
