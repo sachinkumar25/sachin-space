@@ -118,9 +118,9 @@
 }
 
 html {
-  /* Default Zoom Scaling (80%) */
-  /* This shrinks 1rem to 12.8px (from 16px), scaling down the whole UI */
-  font-size: 80%;
+  /* Default Zoom Scaling (70%) */
+  /* This shrinks 1rem to ~11.2px (from 16px), scaling down the whole UI */
+  font-size: 70%;
 }
 
 body {
