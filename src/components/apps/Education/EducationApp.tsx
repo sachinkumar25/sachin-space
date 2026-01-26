@@ -38,21 +38,21 @@ export default function EducationApp() {
             {/* Content Area (Detail) */}
             <div className="flex-1 flex flex-col bg-[#1e1e1e]">
                 {/* Header */}
-                <div className="h-14 border-b border-white/5 flex items-center px-8 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full mb-6">
+                <div className="h-14 border-b border-white/5 flex items-center px-8 bg-[#1e1e1e]/80 backdrop-blur-md sticky top-0 z-10 w-full">
                     <div className="flex flex-col">
-                        <h1 className="text-[15px] font-sf-display font-semibold text-white tracking-tight">
+                        <h1 className="text-lg font-sf-display font-semibold text-white tracking-tight">
                             {selectedEdu.company}
                         </h1>
-                        <span className="text-[11px] text-macos-blue font-medium flex items-center gap-1.5">
+                        <span className="text-xs text-macos-blue font-medium flex items-center gap-1.5">
                             {selectedEdu.role}
                         </span>
                     </div>
                 </div>
 
-                <div className="flex-1 overflow-y-auto px-8 pb-12">
+                <div className="flex-1 overflow-y-auto p-8 pb-16">
                     <div className="max-w-3xl">
                         {/* Meta Data */}
-                        <div className="flex gap-6 mb-8 text-[13px] text-white/60 border-b border-white/5 pb-4">
+                        <div className="flex gap-8 mb-8 text-sm text-white/60 border-b border-white/5 pb-6">
                             <div className="flex items-center gap-2">
                                 <Calendar size={14} /> {selectedEdu.date}
                             </div>
@@ -62,17 +62,17 @@ export default function EducationApp() {
                         </div>
 
                         {/* Content Parsing Loop */}
-                        <div className="space-y-6">
+                        <div className="space-y-8">
                             {selectedEdu.description.map((item, i) => {
                                 if (item.startsWith('GPA:')) {
                                     return (
-                                        <div key={i} className="mac-card p-4 rounded-xl flex items-center gap-3">
-                                            <div className="bg-macos-green/20 p-2 rounded-lg text-macos-green">
+                                        <div key={i} className="mac-card p-6 rounded-xl flex items-center gap-4">
+                                            <div className="bg-macos-green/20 p-3 rounded-lg text-macos-green">
                                                 <GraduationCap size={20} />
                                             </div>
                                             <div>
-                                                <div className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">GPA Score</div>
-                                                <div className="text-[15px] font-sf-display font-bold text-white">{item.replace('GPA: ', '')}</div>
+                                                <div className="text-xs text-white/50 uppercase tracking-wider font-semibold">GPA Score</div>
+                                                <div className="text-lg font-sf-display font-bold text-white">{item.replace('GPA: ', '')}</div>
                                             </div>
                                         </div>
                                     )
@@ -80,10 +80,10 @@ export default function EducationApp() {
                                 if (item.startsWith('Academic Distinctions:') || item.startsWith('Honors & Awards:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-[13px] font-semibold text-white mb-2">
+                                            <h3 className="flex items-center gap-2 text-sm font-semibold text-white mb-3">
                                                 <Trophy size={14} className="text-macos-yellow" /> Awards & Honors
                                             </h3>
-                                            <div className="mac-card p-4 rounded-xl text-[13px] leading-relaxed text-white/80">
+                                            <div className="mac-card p-6 rounded-xl text-sm leading-relaxed text-white/80">
                                                 {item.split(':')[1]}
                                             </div>
                                         </div>
@@ -92,10 +92,10 @@ export default function EducationApp() {
                                 if (item.startsWith('Activities & Societies:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-[13px] font-semibold text-white mb-2">
+                                            <h3 className="flex items-center gap-2 text-sm font-semibold text-white mb-3">
                                                 <Users size={14} className="text-macos-blue" /> Activities
                                             </h3>
-                                            <div className="mac-card p-4 rounded-xl text-[13px] leading-relaxed text-white/80">
+                                            <div className="mac-card p-6 rounded-xl text-sm leading-relaxed text-white/80">
                                                 {item.split(':')[1]}
                                             </div>
                                         </div>
@@ -104,12 +104,12 @@ export default function EducationApp() {
                                 if (item.startsWith('Relevant Coursework:')) {
                                     return (
                                         <div key={i}>
-                                            <h3 className="flex items-center gap-2 text-[13px] font-semibold text-white mb-2">
+                                            <h3 className="flex items-center gap-2 text-sm font-semibold text-white mb-3">
                                                 <BookOpen size={14} className="text-macos-red" /> Coursework
                                             </h3>
                                             <div className="flex flex-wrap gap-2">
                                                 {item.split(':')[1].split(',').map((course, idx) => (
-                                                    <span key={idx} className="mac-badge text-[11px]">
+                                                    <span key={idx} className="mac-badge text-xs">
                                                         {course.trim()}
                                                     </span>
                                                 ))}
@@ -118,7 +118,7 @@ export default function EducationApp() {
                                     )
                                 }
                                 return (
-                                    <p key={i} className="text-white/70 leading-relaxed text-[13px]">{item}</p>
+                                    <p key={i} className="text-white/70 leading-relaxed text-sm">{item}</p>
                                 );
                             })}
                         </div>
