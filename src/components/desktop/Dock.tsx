@@ -34,8 +34,8 @@ function DockIcon({ mouseX, id, icon: Icon, label, iconPath, externalUrl, scale 
         return val - bounds.x - bounds.width / 2;
     });
 
-    const widthSync = useTransform(distance, [-150, 0, 150], [50, 120, 50]); // Smaller base (50px), massive hover (120px)
-    const width = useSpring(widthSync, { mass: 0.1, stiffness: 200, damping: 20 }); // Snappier
+    const widthSync = useTransform(distance, [-100, 0, 100], [48, 64, 48]); // Subtle enlargement (48px to 64px)
+    const width = useSpring(widthSync, { mass: 0.1, stiffness: 250, damping: 25 }); // Snappy and controlled
 
     const { openWindow, windows } = useWindowStore();
     const isOpen = windows[id]?.isOpen;
@@ -104,10 +104,10 @@ export default function Dock() {
 
     return (
         <div
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-end gap-5 px-6 py-5 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/10 shadow-2xl z-50 transition-transform duration-300 ease-out origin-bottom"
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-end gap-3 px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-2xl border border-white/10 shadow-2xl z-50 transition-transform duration-300 ease-out origin-bottom"
         >
             <div
-                className="flex gap-3 items-end"
+                className="flex gap-2 items-end"
                 onMouseMove={(e) => mouseX.set(e.pageX)}
                 onMouseLeave={() => mouseX.set(Infinity)}
             >
